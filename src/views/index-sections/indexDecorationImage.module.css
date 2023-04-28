@@ -1,0 +1,49 @@
+.image-wrapper {
+  width: 100vw;
+  height: fit-content;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.cut {
+  height: 51px;
+  background-image: url('./../../assets/img/cut.png');
+  margin: 60px auto 69px;
+}
+
+.recommend {
+  height: 98px;
+  background-image: url('./../../assets/img/recommend.png');
+  margin: 95px auto 80px;
+}
+
+.connect {
+  height: 100px;
+  background-image: url('./../../assets/img/connect.png');
+  margin: 60px auto 42px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .image {
+    width: 80vw;
+  }
+
+  .cut{
+    margin: 10vw auto;
+  }
+  .recommend,
+  .connect {
+    margin: 0 auto;
+  }
+}

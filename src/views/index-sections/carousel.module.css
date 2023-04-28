@@ -1,0 +1,36 @@
+.section {
+  padding: 0;
+}
+
+.col {
+  padding: 0;
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel > div {
+  box-shadow: none !important;
+  -webkit-filter: drop-shadow(7px 5px 25px rgb(0 0 0 / 31%));
+  filter: drop-shadow(7px 5px 25px rgb(0 0 0 / 31%));
+}
+
+.indicator {
+  gap: 40px;
+}
+
+.indicator li {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.item {
+}
+
+@media screen and (max-width: 768px) {
+  .section {
+    max-width: 80vw;
+    margin: 0 auto;
+  }
+}

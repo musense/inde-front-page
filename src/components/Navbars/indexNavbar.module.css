@@ -1,0 +1,74 @@
+.navbar {
+  position: relative;
+  padding: 0;
+  background-color: var(--theme-color);
+  box-shadow: unset;
+  margin-bottom: 45px;
+
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+}
+
+
+.navbar-logo {
+  height: 98px;
+  width: 182px;
+  background-image: url('./../../assets/img/netLogo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.nav-btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 1em;
+  margin-right: 45px;
+}
+.nav-btn-wrapper * p {
+  display: none;
+}
+.nav-btn {
+  color: var(--theme-color);
+  height: 28px;
+  width: 28px;
+}
+
+.twitter {
+  background-image: url('./../../assets/img/twitter_icon.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.facebook {
+  background-image: url('./../../assets/img/fb_icon.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.instagram {
+  background-image: url('./../../assets/img/ig_icon.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media screen and (min-width: 1200px) {
+  .container {
+    max-width: 1920px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .container {
+    max-width: 1920px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .nav-btn-wrapper { 
+    margin-right: 25px;
+  }
+}
