@@ -1,0 +1,13 @@
+.title-main-date {
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+}
+
+.create-date {
+    position: relative;
+    white-space: nowrap;
+}

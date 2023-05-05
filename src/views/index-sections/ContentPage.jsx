@@ -10,87 +10,107 @@ import { useOutletContext } from 'react-router-dom';
 import ContentPageLeft from './ContentPageLeft';
 import ContentPageConnect from './ContentPageConnect';
 import ContentPageRight from './ContentPageRight';
-import { getTitleContents } from "../../assets/js/titleContents";
+import { getTitleContents, geRelatedArticles } from "../../assets/js/titleContents";
 import useScrollToTop from "../../components/hook/useScrollToTop";
 
-
-// const item0 = {
-//   src: require('assets/img/bg1.png'),
-//   altText: 'Nature, United States',
-// };
-
+import DecoBackground from "components/DecoBackground";
+import InterestedContents from './InterestedContents';
+const item = {
+  src: '/public/img/content/banner.png',
+  altText: 'The most popular games in India',
+  title: 'The most popular games in India',
+};
 function ContentPage() {
-  useScrollToTop();
+  useScrollToTop(664);
 
   const { contents, tags } = useOutletContext();
   const [_titleContents_, setTitleContents] = useState(null);
   const [_theContent_, setTheContent] = useState(null);
   const [prevID, setPrevID] = useState(null);
+  const [prevTitle, setPrevTitle] = useState(null);
   const [nextID, setNextID] = useState(null);
+  const [nextTitle, setNextTitle] = useState(null);
+
+  const [interestedContents, setInterestedContents] = useState(null);
+
 
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { categoryName, id } = useParams();
+  console.log("🚀 ~ file: ContentPage.jsx:33 ~ ContentPage ~ id:", id)
+  console.log("🚀 ~ file: ContentPage.jsx:33 ~ ContentPage ~ categoryName:", categoryName)
+
+
+
+
 
   const findOneByIdAndReturnPrevNextID = (arr = [], id = null) => {
     if (id === null || typeof id !== 'string') return null;
     const theIndex = arr.findIndex((item) => item._id === id);
     const theContent = arr[theIndex];
-    const prevID = theIndex === 0 ? null : arr[theIndex - 1]._id;
-    const nextID = theIndex === arr.length - 1 ? null : arr[theIndex + 1]._id;
-    setTitleContents(arr);
+    const { _id: prevID, title: prevTitle } = theIndex === 0 ? { _id: '', title: '' } : arr[theIndex - 1];
+    const { _id: nextID, title: nextTitle } = theIndex === arr.length - 1 ? { _id: '', title: '' } : arr[theIndex + 1];
+    setTitleContents(arr.sort((a1, a2) => new Date(a2.date) - new Date(a1.date)));
     setTheContent(theContent);
     setPrevID(prevID)
+    setPrevTitle(prevTitle)
     setNextID(nextID)
+    setNextTitle(nextTitle)
   };
 
 
-  function goToContent(contentID) {
-    if (contentID === null) return
-    navigate(`/content/${contentID}`)
-  }
 
   useEffect(() => {
     if (contents !== null) {
       findOneByIdAndReturnPrevNextID(contents, id);
+      geRelatedArticles({ _id: id })
+        .then((interestedContents) => {
+          console.log("🚀 ~ file: ContentPage.jsx:65 ~ .then ~ interestedContents:", interestedContents)
+
+          setInterestedContents(interestedContents.slice(0, 6))
+        })
     } else {
       getTitleContents()
         .then((titleContents) => {
-          findOneByIdAndReturnPrevNextID(titleContents, id);
+          const { data } = titleContents
+          findOneByIdAndReturnPrevNextID(data, id);
         })
+
       navigate('/');
     }
   }, [id]);
 
 
+
   return (
     <>
+      <DecoBackground type={'content'} />
       <div className={`section ${styles.section}`}>
-        {/* <img
-          src={item0.src}
-          alt={item0.altText}
-        /> */}
+        <img src={item.src} alt={item.altText} title={item.title} />
       </div>
-      <IndexDecorationImage imageType={'cut'} />
-      <div className={styles['content-page']}>
-        {_theContent_ && <ContentPageLeft
-          content={_theContent_}
-          prevID={prevID}
-          nextID={nextID}
-          goToContent={goToContent}
-        />}
-        {tags && <ContentPageRight tags={tags} />}
-      </div>
-      <IndexDecorationImage imageType={'connect'} />
 
-      <div className={styles['connect-flex-site']}>
-        {_titleContents_ && (
-          <ContentPageConnect
-            contents={_titleContents_}
-          />
-        )}
-      </div>
+
+      <ContentPageLeft
+        content={_theContent_}
+        prevID={prevID}
+        prevTitle={prevTitle}
+        nextID={nextID}
+        nextTitle={nextTitle}
+        category={categoryName}
+      />)
+      <IndexDecorationImage
+        marginTop={66}
+        marginBottom={52}
+        imageType={'line'}
+      />
+
+      <InterestedContents
+        interestedContents={interestedContents} />
     </>
   );
 }
 
 export default ContentPage;
+
+
+
+

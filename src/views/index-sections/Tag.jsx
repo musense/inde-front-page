@@ -2,19 +2,19 @@ import React from "react";
 import styles from "./contentPage.module.css";
 import { useNavigate } from "react-router-dom";
 
-function Tag({ index, tagName }) {
-    // console.log("🚀 ~ file: Tag.js:6 ~ Tag ~ tagName", tagName)
+function Tag({ index, tag }) {
+    console.log("🚀 ~ file: Tag.js:6 ~ Tag ~ tag", tag)
     const navigate = useNavigate();
-    function goToContentsByTag(tagName) {
-        navigate(`/content/tag/${tagName}`)
-    }
+    // function goToContentsByTag(tag) {
+    //     navigate(`/content/tag/${tag}`)
+    // }
 
     return (<div
-        onClick={() => goToContentsByTag(tagName)}
+        // onClick={() => goToContentsByTag(tag)}
         key={index}
         className={styles['trend-tags-flex-tags']}
     >
-        #&nbsp;&nbsp;{tagName}
+        #&nbsp;&nbsp;{tag.name}
     </div>);
 }
 

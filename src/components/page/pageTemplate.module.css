@@ -1,0 +1,51 @@
+.page-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 0 auto;
+    justify-content: center;
+    gap: 47px;
+    width: 700px;
+    user-select: none;
+    font-family: NotoSans-Regular;
+}
+
+.page-wrapper button {
+    background-color: transparent;
+    color: var(--theme-red);
+    font-size: 41px;
+    display: block;
+    padding: unset;
+    border: unset;
+    width: 46px;
+}
+
+.page-wrapper p {
+    font-family: 'Times New Roman', Times, serif;
+    color: var(--theme-red);
+    font-size: 41px;
+    margin: unset;
+    width: 46px;
+}
+
+.page-wrapper button:first-child,
+.page-wrapper button:last-child {
+    margin: auto;
+}
+
+.page-wrapper button:focus {
+    border: unset;
+    outline: unset;
+}
+
+button.active {
+    font-family: NotoSans-Medium;
+    font-weight: bold;
+    /* color: var(--theme-text); */
+}
+
+button.displayNone {
+    opacity: 0;
+    pointer-events: none;
+}

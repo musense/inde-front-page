@@ -58,7 +58,7 @@
 
 .title {
   height: 38px;
-  font-size: var(--theme-font-lg);
+  /* font-size: var(--theme-font-lg); */
   line-height: 1;
   letter-spacing: 9.3px;
   margin-bottom: 74px;

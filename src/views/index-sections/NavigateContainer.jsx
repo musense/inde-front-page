@@ -1,12 +1,17 @@
 import React from "react";
-import styles from './newTitle.module.css'
+import styles from './contentPage.module.css'
 import { useNavigate } from "react-router-dom";
 
-function NavigateContainer({ contentID, children, index, customClassName = "title-container" }) {
+function NavigateContainer({
+    category,
+    contentID,
+    children,
+    index,
+    customClassName = "title-container" }) {
     const navigate = useNavigate()
     function goToContent(contentID) {
         if (contentID === null) return
-        navigate(`/content/${contentID}`)
+        navigate(`/c/${category}/p/${contentID}`)
     }
     return (<div
         className={styles[customClassName]}

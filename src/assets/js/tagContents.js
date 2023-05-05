@@ -1,11 +1,9 @@
-import axios from "axios";
-
-const apiUrl = import.meta.env.REACT_APP_SERVER_URL
+import { instance } from "./AxiosInstance";
 
 export async function getTagsContents() {
-    const response = await axios.get(`${apiUrl}/tags`)
+    const response = await instance.get(`tags`)
         .then(res => res.data)
-
+    // const { data, currentPage, limit, totalCount, totalPages } = response
     // console.group('getTagsContents')
     // console.log(response)
     // console.groupEnd('getTagsContents')

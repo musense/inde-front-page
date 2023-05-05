@@ -12,7 +12,7 @@
   color: var(--theme - white);
   display: flex;
   z-index: 999999;
-  background-image: url(./../../assets//img/toTop.png);
+  /* background-image: url(./../../assets//img/toTop.png); */
   background-size: contain;
   background-position: center;
   outline: unset;;
@@ -20,7 +20,7 @@
 }
 /* .fixedToTopBtn.active, */
 .fixedToTopBtn:hover{
-  background-image: url(./../../assets//img/toTop_h.png);
+  /* background-image: url(./../../assets//img/toTop_h.png); */
 }
 .hide {
   right: -999999vw;

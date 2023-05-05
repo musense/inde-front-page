@@ -1,22 +1,52 @@
 .navbar {
-  position: relative;
   padding: 0;
+  margin: 0;
+  min-height: unset;
+  position: relative;
+  padding: 50px 390px 35px;
   background-color: var(--theme-color);
   box-shadow: unset;
-  margin-bottom: 45px;
-
+  max-height: var(--navbar-height);
+  z-index: 9999;
 }
 
-.container {
+.navbar ul {
+  height: 30px;
+}
+
+.navbar a {
+  box-sizing: border-box;
+  text-decoration: none;
+  font-size: 23px;
+  color: var(--theme-text);
+}
+
+.navbar a:hover,
+.navbar a.active {
+  text-decoration: none;
+  /* font-size: 27px; */
+  color: #ebbc29;
+}
+
+/* *:has(>.container) {
   margin: 0;
   padding: 0;
+} */
+
+.container {
+  max-width: 1920px;
+  display: flex;
+  flex-direction: row;
+  padding: 51px 389px 20px 392px;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 
 .navbar-logo {
-  height: 98px;
-  width: 182px;
-  background-image: url('./../../assets/img/netLogo.png');
+  height: 66px;
+  width: 404px;
+  background-image: url('assets/img/logo.png');
   background-repeat: no-repeat;
   background-position: center;
   top: 0;
@@ -28,39 +58,21 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  gap: 1em;
-  margin-right: 45px;
+  gap: 28px;
+
 }
+
 .nav-btn-wrapper * p {
   display: none;
 }
-.nav-btn {
-  color: var(--theme-color);
-  height: 28px;
-  width: 28px;
-}
 
-.twitter {
-  background-image: url('./../../assets/img/twitter_icon.png');
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.facebook {
-  background-image: url('./../../assets/img/fb_icon.png');
-  background-repeat: no-repeat;
-  background-position: center;
-}
-.instagram {
-  background-image: url('./../../assets/img/ig_icon.png');
-  background-repeat: no-repeat;
-  background-position: center;
-}
 
 @media screen and (min-width: 1200px) {
   .container {
     max-width: 1920px;
   }
 }
+
 @media screen and (max-width: 1200px) {
   .container {
     max-width: 1920px;
@@ -68,7 +80,7 @@
 }
 
 @media screen and (max-width: 992px) {
-  .nav-btn-wrapper { 
+  .nav-btn-wrapper {
     margin-right: 25px;
   }
 }

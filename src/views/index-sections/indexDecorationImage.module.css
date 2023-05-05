@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* background-color: lightblue; */
 }
 
 .image {
@@ -15,23 +16,18 @@
   background-size: contain;
 }
 
-.cut {
-  height: 51px;
-  background-image: url('./../../assets/img/cut.png');
-  margin: 60px auto 69px;
+.line {
+  height: 50px;
+  background-image: url('assets/img/category/line.png');
+  /* margin: 60px auto 69px; */
 }
 
-.recommend {
-  height: 98px;
-  background-image: url('./../../assets/img/recommend.png');
-  margin: 95px auto 80px;
+.thin-line {
+  height: 25px;
+  background-image: url('assets/img/category/thin-line.png');
+  /* margin: 60px auto 69px; */
 }
 
-.connect {
-  height: 100px;
-  background-image: url('./../../assets/img/connect.png');
-  margin: 60px auto 42px;
-}
 
 
 @media screen and (max-width: 768px) {

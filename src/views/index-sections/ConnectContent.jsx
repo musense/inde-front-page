@@ -3,20 +3,11 @@ import React from "react";
 import styles from './tagContentPage.module.css';
 import Tag from './Tag';
 import NavigateContainer from "./NavigateContainer";
+import DateTimeStamp from "components/Date/DateTimeStamp";
 
-const dateOption = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-};
-const timeOption = {
-    hour: '2-digit',
-    hour12: false,
-    hourCycle: 'h24',
-    minute: '2-digit',
-};
 
-function ConnectContent({ index, content, item1=null }) {
+function ConnectContent({ index, content, item1=null, category }) {
+// console.log("🚀 ~ file: ConnectContent.jsx:20 ~ ConnectContent ~ content:", content)
 
     return (
         <NavigateContainer
@@ -24,22 +15,11 @@ function ConnectContent({ index, content, item1=null }) {
             index={index}
             contentID={content._id}
             customClassName={"connect-container"}
+            category={category}
         >
             <div className={styles['title-mainImage']}>
-                <div className='title-main-date'>
-                    <span className={styles['create-date']}>
-                        {new Date(content.createdAt).toLocaleDateString(
-                            undefined,
-                            dateOption
-                        )}
-                        &nbsp; &nbsp;
-                        {new Date(content.createdAt).toLocaleTimeString(
-                            undefined,
-                            timeOption
-                        )}
-                    </span>
-                </div>
-                {/* <img src={item1.src} alt={item1.altText}/> */}
+               
+                <img width='100%' height='100%' src={content.homeImagePath} alt={content.altText}/>
             </div>
             <div className={styles['title-wrapper']}>
                 <div
@@ -48,18 +28,21 @@ function ConnectContent({ index, content, item1=null }) {
                 >
                     {content.title}
                 </div>
-                <div
+                <DateTimeStamp date={content.createdAt} />
+                {/* <div
                     className={`${styles.content}`}
                     dangerouslySetInnerHTML={{ __html: content.content }}
-                />
-                <div className={styles['title-tags']}>
-                    {content.tags.map((tagName, index) =>
+                /> */}
+                {/* <div className={styles['title-tags']}>
+                    {content.tags.length !== 0 && content.tags.map((tagName, index) =>
                         <Tag key={index} tagName={tagName} />
                     )}
-                </div>
+                </div> */}
             </div>
         </NavigateContainer>
     );
 }
 
 export default ConnectContent;
+
+

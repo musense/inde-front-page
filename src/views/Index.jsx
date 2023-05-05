@@ -15,6 +15,7 @@ function Index() {
   const mounted = useRef();
   const location = useLocation()
   const [_titleContents_, setTitleContents] = useState(null);
+  console.log("🚀 ~ file: Index.jsx:18 ~ Index ~ _titleContents_:", _titleContents_)
   const [_tagContents_, setTagContents] = useState(null);
 
   // let displayBtn = false
@@ -25,16 +26,20 @@ function Index() {
       mounted.current = true;
       getTitleContents()
         .then((titleContents) => {
-          // console.log(titleContents);
-          setTitleContents(titleContents)
+          const { data } = titleContents
+          console.log(titleContents);
+          console.log("🚀 ~ file: Index.jsx:29 ~ .then ~ data:", data)
+          const filteredData = data
+            .filter((item) => item.categories && item.categories.name !== 'casino')
+          console.log("🚀 ~ file: Index.jsx:31 ~ .then ~ filteredData:", filteredData)
+          setTitleContents(filteredData)
         })
       getTagsContents()
-        .then(tags => tags.filter(tag => tag.showOnPage === 'true'))
         .then(tags => {
           setTagContents(tags)
         })
-    } 
-  }, [mounted,]);
+    }
+  }, []);
 
   return (
     <div id="topSection">

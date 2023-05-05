@@ -1,69 +1,66 @@
 import React from "react";
-import styles from "./contentPage.module.css";
 import Tag from "./Tag";
-
-const dateOption = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-};
-const timeOption = {
-  hour: '2-digit',
-  hour12: false,
-  hourCycle: 'h24',
-  minute: '2-digit',
-};
+import { Link } from "react-router-dom";
+import GoToContentPage from "components/page/goToContentPage";
+import styles from './contentPageLeft.module.css'
+// import DateTimeStamp from "components/Date/DateTimeStamp";
 
 const item = {
-  // src: require('assets/img/content_image.png'),
-  altText: 'Content Image',
+  src: '/public/img/content/image.png',
+  altText: `The Events You Can't Miss in Cricket This Year | All You Need to Know About Cricket`,
 };
 
-function ContentPageLeft({ content, prevID, nextID, goToContent }) {
+function ContentPageLeft({
+  content,
+  prevID, nextID,
+  prevTitle, nextTitle,
+  category }) {
 
-
-  return (<div className={styles['left-content']}>
-    <div className={styles['title-view']}>
-      <div className={styles['main-title-decoration']}></div>
-      <h1 className={styles['main-title']}>{content.title}</h1>
-    </div>
-    <div className={styles['main-content']}>
-      <img
+  return content && (
+    <div className={styles['content-page']}>
+      <div className={styles['left-content']}>
+        <div className={styles['title-view']}>
+          <Link className={styles['main-title-decoration']} to={`/c/${content.categories.name}`}>Return</Link>
+          <h1 className={styles['main-title']}>{content.title}</h1>
+        </div>
+        <div className={styles['main-content']}>
+          {/* <img
         className={styles['title-main-image']}
         src={item.src}
         alt={item.altText}
-      />
-      <div
-        className={styles['title-main-content']}
-        dangerouslySetInnerHTML={{ __html: content.content }}
-      />
+        title={item.altText}
+      /> */}
+          <div>
+            <div
+              className={styles['title-main-content']}
+              dangerouslySetInnerHTML={{ __html: content.htmlContent }}
+            />
+            <GoToContentPage
+              categoryName={content.categories.name}
+              prevID={prevID}
+              prevTitle={prevTitle}
+              nextID={nextID}
+              nextTitle={nextTitle}
+            />
+          </div>
 
-      <div className={styles['title-main-date']}>
-        <span className={styles['create-date']}>
-          {new Date(content.createdAt).toLocaleDateString(
-            undefined,
-            dateOption
-          )}
-          &nbsp; &nbsp;
-          {new Date(content.createdAt).toLocaleTimeString(
-            undefined,
-            timeOption
-          )}
-        </span>
+
+          <div className={styles['content-side']}>
+            <div className={styles['content-advertise']}></div>
+            <div className={styles['content-tags']}>
+              <div>Tag</div>
+              {content.tags.map((tag, index) =>
+                <Tag key={index} tag={tag} />
+              )}
+            </div>
+          </div>
+          {/* <DateTimeStamp date={content.createdAt} /> */}
+        </div>
+
       </div>
     </div>
-
-    <div className={styles['content-tags']}>
-      {content.tags.map((tagName, index) =>
-        <Tag key={index} tagName={tagName} />
-      )}
-    </div>
-
-    <div className={styles['content-btn']}>
-      <div onClick={() => goToContent(prevID)} className={`${styles.btn} ${styles['prev-btn']}`}></div>
-      <div onClick={() => goToContent(nextID)} className={`${styles.btn} ${styles['next-btn']}`}></div>
-    </div>
-  </div>);
+  );
 }
 
 export default ContentPageLeft;
+

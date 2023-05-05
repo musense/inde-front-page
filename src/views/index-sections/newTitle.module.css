@@ -21,22 +21,26 @@
   width: 100%;
   align-items: center;
 }
+
 .news-titles .content-section {
   gap: 62px;
 }
+
 .hot-titles .content-section {
   gap: 80px;
 }
+
 .title-container {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
+  flex-direction: column;
   flex-wrap: nowrap;
-  gap: 35px;
+  gap: 39px;
   cursor: pointer;
   /* min-width: 481px; */
   height: -moz-fit-content;
   width: fit-content;
-  max-width: 786px;
+  max-width: 379px;
   justify-content: space-between;
 }
 
@@ -56,14 +60,17 @@
 .connect-flex-box {
   position: relative;
   background-color: unset;
-  width: 268px;
-  height: 261px;
+  width: 403px;
+  height: 257px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
+
 }
+
 
 .flex-site {
   position: relative;
@@ -81,15 +88,17 @@
 .title-container:hover * .title-more {
   background-image: url('./../../assets/img/more_Botton_h.png');
 }
+
 .title-mainImage {
   position: relative;
   box-shadow: 1px 11px 11px 0px rgb(0 0 0 / 25%);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-image: url(/img/category/image_sport.png)
 }
 
-.news-titles * .title-mainImage {
+/* .news-titles * .title-mainImage {
   width: 271px;
   height: 219px;
   background-image: url('./../../assets/img/news_image.png');
@@ -107,7 +116,7 @@
   width: 2px;
   height: 159px;
   background-image: url('./../../assets/img/hot_line.png');
-}
+} */
 
 .title-wrapper {
   position: relative;
@@ -121,13 +130,14 @@
 .hot-titles *.title-wrapper {
   width: 366px;
 }
+
 .hot-titles *.title-wrapper span {
   overflow: hidden;
 }
 
 .title {
   height: 38px;
-  font-size: var(--theme-font-lg);
+  /* font-size: var(--theme-font-lg); */
   line-height: 1;
   letter-spacing: 9.3px;
   margin-bottom: 25px;
@@ -137,17 +147,20 @@
   color: var(--theme-dark);
   font-family: NotoSerifTC;
 }
+
 .ranking {
   display: block;
   margin-bottom: 10px;
   color: var(--theme-gold);
 }
+
 .hot-titles * .title {
   font-size: var(--theme-font-sm);
   color: var(--theme-gold);
   height: 59px;
   margin-bottom: 16px;
 }
+
 .content * {
   all: unset;
 }
@@ -209,23 +222,12 @@
   cursor: pointer;
 }
 
-.connect-container {
-  display: flex;
-  width: 794px;
-  flex-direction: row;
-  cursor: pointer;
-  /* background-color: whitesmoke; */
-  background-color: unset;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
 @media screen and (max-width: 1550px) {
   .section-basic {
     flex-direction: column;
     gap: 100px;
   }
+
   .content-container {
     margin: auto;
   }
@@ -236,35 +238,35 @@
     flex-direction: column;
     align-items: center;
   }
-  .connect-container {
-    flex-direction: column;
-    max-width: 794px;
-    width: fit-content;
-    align-items: center;
-    gap: 20px;
-  }
+
+
   .hot-container {
     flex-direction: column;
     align-items: center;
     gap: 20px;
   }
+
   .hot-titles .content-section {
     gap: 40px;
   }
+
   .title-mainImage::after {
     display: none;
   }
+
   .flex-box {
     flex-direction: column;
     align-items: center;
   }
+
   .title {
     text-align: center;
   }
+
   .title-wrapper,
   .content,
   .title-more {
-    max-width: 481px;
+    max-width: 379px;
     width: fit-content;
   }
 }
@@ -273,53 +275,65 @@
   .section-basic {
     gap: 5vw;
   }
+
   .title-container {
     width: 70vw;
     gap: 10vw;
   }
-  .connect-container {
-    width: 70vw;
-  }
+
+
+
   .title {
     margin-bottom: 0;
     letter-spacing: 0.5em;
     max-width: 100%;
     /* font-size: var(--theme-font-news-title) */
   }
+
   .hot-container {
     width: 60vw;
   }
+
   .hot-titles .content-section {
     max-width: 60vw;
   }
+
   .news-titles .content-section {
     gap: 5vw;
   }
+
   .news-titles * .title-mainImage {
     width: 50vw;
     height: 41vw;
   }
+
   .hot-titles * .title-mainImage {
     width: 40vw;
     height: 32vw;
   }
+
   .title-wrapper {
     width: 100%
   }
+
   .hot-titles .title-wrapper {
     width: 100%;
   }
+
   .hot-titles .content {
     max-width: 80vw;
   }
+
   .flex-box {
     width: 70vw;
     min-width: unset;
   }
+
   .hot-titles * .title {
     height: 9vw;
     margin-bottom: 2vw;
   }
+
   .connect-flex-box {
     width: 50vw;
     height: 48vw;

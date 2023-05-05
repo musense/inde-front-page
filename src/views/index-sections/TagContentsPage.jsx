@@ -28,9 +28,10 @@ function TagContentsPage() {
 
   useEffect(() => {
     getTitleContentsByTag(tagName)
-      .then((titleContents) => {
+      .then(({res}) => {
         console.log("🚀 ~ file: TagContentsPage.js:40 ~ .then ~ titleContents:", titleContents)
-        setTitleContents(titleContents);
+        const { data } = res
+        setTitleContents(data);
       });
   }, [tagName]);
 

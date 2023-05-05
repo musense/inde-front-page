@@ -1,8 +1,12 @@
 :root {
-  --theme-color: #9e2a2b;
-  --theme-gold: #c6922a;
+  --theme-color: #ffffff;
+
+  --theme-gold-tag: #ebbc29;
+  --theme-gold: #ffcd69;
   --theme-dark: #343a40;
   --theme-white: #fff;
+  --theme-text: #1b1b1b;
+  --theme-red: #951207;
 
   --theme-font-3l: 58px;
   --theme-font-2l: 42px;
@@ -12,6 +16,8 @@
   --theme-font-2s: 21px;
   --theme-font-3s: 17.5px;
   --theme-font-4s: 13.5px;
+
+  --navbar-height: 153px;
 
   --sm: 576px;
   --md: 768px;
@@ -32,17 +38,3 @@
     --theme-font-4s: 0.6em;
   }
 }
-
-@font-face {
-  font-family: BIZUDGothic;
-  src: url('./../assets/fonts/BIZUDGothic-Regular.ttf');
-}
-@font-face {
-  font-family: Optima;
-  src: url('./../assets/fonts/Optima.ttf');
-}
-@font-face {
-  font-family: NotoSerifTC;
-  src: url('./../assets/fonts/NotoSerifTC-Black.otf');
-}
-

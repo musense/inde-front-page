@@ -1,0 +1,42 @@
+.btn {
+  position: relative;
+  background-color: unset;
+  cursor: pointer;
+}
+
+.prev-btn,
+.next-btn {
+  max-width: 200px;
+  overflow: hidden;
+  padding-top: 40px;
+  text-overflow: ellipsis;
+  height: 85px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.prev-btn::before,
+.next-btn::before {
+  content: "";
+  display: block;
+  position: relative;
+  margin-top: -35px;
+  margin-bottom: 5px;
+  background-size: contain;
+  width: 112px;
+  height: 26px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.prev-btn::before {
+  background-image: url('assets/img/content/prev.png');
+  margin-left: 0;
+}
+
+.next-btn::before {
+  background-image: url('assets/img/content/next.png');
+  margin-left: auto;
+}
