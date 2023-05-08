@@ -12,12 +12,38 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --theme-color: #ffffff;
+
+  --theme-gold-tag: #ebbc29;
+  --theme-gold: #ffcd69;
+  --theme-dark: #343a40;
+  --theme-white: #fff;
+  --theme-text: #1b1b1b;
+  --theme-red: #951207;
+
+  --theme-font-3l: 58px;
+  --theme-font-2l: 42px;
+  --theme-font-lg: 38px;
+  --theme-font-md: 36.5px;
+  --theme-font-sm: 25px;
+  --theme-font-2s: 21px;
+  --theme-font-3s: 17.5px;
+  --theme-font-4s: 13.5px;
+
+  --navbar-height: 153px;
+
+  --sm: 576px;
+  --md: 768px;
+  --lg: 992px;
+  --xl: 1200px;
+  --xxl: 1400px;
 }
+
 
 #topSection{
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
 }
 .title {
   user-select: none;
@@ -91,3 +117,16 @@ button:focus-visible {
   src: url('/public/fonts/NotoSansSC-Regular.otf');
 }
 
+
+@media screen and (max-width: 768px) {
+  :root {
+    --theme-font-3l: 2em;
+    --theme-font-2l: 1.75em;
+    --theme-font-lg: 1.5em;
+    --theme-font-md: 1.25em;
+    --theme-font-sm: 1em;
+    --theme-font-2s: 0.9em;
+    --theme-font-3s: 0.75em;
+    --theme-font-4s: 0.6em;
+  }
+}

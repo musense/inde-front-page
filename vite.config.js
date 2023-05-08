@@ -12,6 +12,7 @@ export default defineConfig({
       'assets': resolve(rootDir, 'src/assets/'),
       'components': resolve(rootDir, 'src/components/'),
       'views': resolve(rootDir, 'src/views/'),
+      'store': resolve(rootDir, 'src/store/'),
     }
   },
   server: {

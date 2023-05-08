@@ -8,7 +8,7 @@ export default function GoToBtn({category, title, id, type }) {
         if (contentID === null) return
         navigate(`/c/${category}/p/${contentID}`)
     }
-    return id && <div onClick={() => goToContent(id)} title={title}
+    return (id && title) && <div onClick={() => goToContent(id)} title={title}
         className={`${styles.btn} ${type === 'prev'
             ? styles['prev-btn']
             : type === 'next'

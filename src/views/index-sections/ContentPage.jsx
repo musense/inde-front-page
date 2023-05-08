@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer, useContext } from 'react';
 
-import { useParams, useNavigate } from 'react-router-dom';
+
+import { useParams } from 'react-router-dom';
 // core components
-
 import styles from './contentPage.module.css';
 import IndexDecorationImage from './IndexDecorationImage';
 
-import { useOutletContext } from 'react-router-dom';
 import ContentPageLeft from './ContentPageLeft';
-import ContentPageConnect from './ContentPageConnect';
-import ContentPageRight from './ContentPageRight';
-import { getTitleContents, geRelatedArticles } from "../../assets/js/titleContents";
-import useScrollToTop from "../../components/hook/useScrollToTop";
+import { getTitleContentsByID, getRelatedArticles, getTitleContents } from "assets/js/titleContents";
+import useScrollToTop from "components/hook/useScrollToTop";
 
-import DecoBackground from "components/DecoBackground";
 import InterestedContents from './InterestedContents';
+
+import { TitleContext } from "views/index";
+
 const item = {
   src: '/public/img/content/banner.png',
   altText: 'The most popular games in India',
@@ -23,67 +22,72 @@ const item = {
 function ContentPage() {
   useScrollToTop(664);
 
-  const { contents, tags } = useOutletContext();
-  const [_titleContents_, setTitleContents] = useState(null);
-  const [_theContent_, setTheContent] = useState(null);
-  const [prevID, setPrevID] = useState(null);
-  const [prevTitle, setPrevTitle] = useState(null);
-  const [nextID, setNextID] = useState(null);
-  const [nextTitle, setNextTitle] = useState(null);
+  const [state, dispatch] = useContext(TitleContext);
+  console.log("🚀 ~ file: ContentPage.jsx:26 ~ ContentPage ~ state:", state)
 
+  const [_theContent_, setTheContent] = useState(null);
+  const [prevInfo, setPrevInfo] = useState(null);
+  const [nextInfo, setNextInfo] = useState(null);
   const [interestedContents, setInterestedContents] = useState(null);
 
-
-  const navigate = useNavigate();
   const { categoryName, id } = useParams();
-  console.log("🚀 ~ file: ContentPage.jsx:33 ~ ContentPage ~ id:", id)
-  console.log("🚀 ~ file: ContentPage.jsx:33 ~ ContentPage ~ categoryName:", categoryName)
 
+  const findOneByIdAndReturnPrevNextID = (arr = [], serialNumber = null) => {
 
+    if (arr.length === 0) return null
+    if (serialNumber === null || typeof serialNumber !== 'number') return null;
+    const mapContentInto = (content) => content && ({
+      _id: content._id,
+      title: content.title,
+    })
 
+    const prevContent = arr.find(a => a.serialNumber === serialNumber + 1)
+    const nextContent = arr.find(a => a.serialNumber === serialNumber - 1)
 
+    const prevInfo = prevContent ? mapContentInto(prevContent) : null
+    const nextInfo = nextContent ? mapContentInto(nextContent) : null
 
-  const findOneByIdAndReturnPrevNextID = (arr = [], id = null) => {
-    if (id === null || typeof id !== 'string') return null;
-    const theIndex = arr.findIndex((item) => item._id === id);
-    const theContent = arr[theIndex];
-    const { _id: prevID, title: prevTitle } = theIndex === 0 ? { _id: '', title: '' } : arr[theIndex - 1];
-    const { _id: nextID, title: nextTitle } = theIndex === arr.length - 1 ? { _id: '', title: '' } : arr[theIndex + 1];
-    setTitleContents(arr.sort((a1, a2) => new Date(a2.date) - new Date(a1.date)));
-    setTheContent(theContent);
-    setPrevID(prevID)
-    setPrevTitle(prevTitle)
-    setNextID(nextID)
-    setNextTitle(nextTitle)
+    console.log("🚀 ~ file: ContentPage.jsx:69 ~ findOneByIdAndReturnPrevNextID ~ prevInfo:", prevInfo)
+    console.log("🚀 ~ file: ContentPage.jsx:69 ~ findOneByIdAndReturnPrevNextID ~ nextInfo:", nextInfo)
+    setPrevInfo(prevInfo)
+    setNextInfo(nextInfo)
   };
 
 
-
   useEffect(() => {
-    if (contents !== null) {
-      findOneByIdAndReturnPrevNextID(contents, id);
-      geRelatedArticles({ _id: id })
-        .then((interestedContents) => {
-          console.log("🚀 ~ file: ContentPage.jsx:65 ~ .then ~ interestedContents:", interestedContents)
 
-          setInterestedContents(interestedContents.slice(0, 6))
+    async function getTitleContentsByIDAsync() {
+      const payload = {
+        _id: id,
+      }
+      const theContent = await getTitleContentsByID(payload);
+      console.log("🚀 ~ file: ContentPage.jsx:60 ~ getTitleContentsByIDAsync ~ theContent:", theContent)
+      setTheContent(theContent);
+      // const { data } = titleContents
+      if (state.contents === null) {
+        const res = await getTitleContents();
+        console.log("🚀 ~ file: ContentPage.jsx:74 ~ getTitleContentsByIDAsync ~ res:", res)
+        const { data } = res
+        findOneByIdAndReturnPrevNextID(data, theContent.serialNumber);
+        dispatch({
+          type: 'SET_ALL_CONTENTS',
+          payload: data
         })
-    } else {
-      getTitleContents()
-        .then((titleContents) => {
-          const { data } = titleContents
-          findOneByIdAndReturnPrevNextID(data, id);
-        })
+      } else {
+        findOneByIdAndReturnPrevNextID(state.contents, theContent.serialNumber);
+      }
 
-      navigate('/');
+      const interestedContents = await getRelatedArticles(payload)
+      setInterestedContents(interestedContents.slice(0, 6))
     }
+    getTitleContentsByIDAsync()
+
   }, [id]);
 
 
 
   return (
     <>
-      <DecoBackground type={'content'} />
       <div className={`section ${styles.section}`}>
         <img src={item.src} alt={item.altText} title={item.title} />
       </div>
@@ -91,12 +95,10 @@ function ContentPage() {
 
       <ContentPageLeft
         content={_theContent_}
-        prevID={prevID}
-        prevTitle={prevTitle}
-        nextID={nextID}
-        nextTitle={nextTitle}
+        prevInfo={prevInfo}
+        nextInfo={nextInfo}
         category={categoryName}
-      />)
+      />
       <IndexDecorationImage
         marginTop={66}
         marginBottom={52}

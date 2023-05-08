@@ -1,16 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "./goToContentPage.module.css";
 import GoToBtn from "./goToBtn"
 
-export default function GoToContentPage({ categoryName, prevID, prevTitle, nextID, nextTitle }) {
-
-
-
-
-    
+export default function GoToContentPage({
+    categoryName,
+    prevInfo,
+    nextInfo
+}) {
     return <div className={styles['content-btn']}>
-        <GoToBtn category={categoryName} title={prevTitle} id={prevID} type='prev' />
-        <GoToBtn category={categoryName} title={nextTitle} id={nextID} type='next' />
+        {prevInfo && <GoToBtn category={categoryName} title={prevInfo.title} id={prevInfo._id} type='prev' />}
+        {nextInfo && <GoToBtn category={categoryName} title={nextInfo.title} id={nextInfo._id} type='next' />}
     </div>;
 }
 

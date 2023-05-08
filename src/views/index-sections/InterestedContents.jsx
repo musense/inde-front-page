@@ -35,9 +35,7 @@ export default function InterestedContents({ interestedContents }) {
         <div className={styles['connect-flex-box-wrapper']}>
           <ContentPageConnect
             contents={viewInterestedContents} />
-        </div>
-  
-  
+        </div>  
         <div>
           {
             interestedContents.findIndex(c => c._id === viewInterestedContents[viewInterestedContents.length - 1]._id) !== interestedContents.length - 1 &&

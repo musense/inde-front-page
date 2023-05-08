@@ -1,6 +1,5 @@
 import useScrollToTop from "components/hook/useScrollToTop";
 import React from "react";
-import { useOutletContext } from "react-router-dom";
 import Carousel from "../index-sections/Carousel";
 
 import IndexViewBlock from "components/IndexViewBlock/IndexViewBlock";
@@ -25,7 +24,6 @@ const item3 = {
 
 function IndexView() {
     useScrollToTop();
-    const { contents, tags } = useOutletContext()
 
     return (
         <>

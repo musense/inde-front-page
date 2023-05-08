@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import styles from './pageTemplate.module.css'
+import useScrollToTop from '../hook/useScrollToTop';
 
 const PageTemplate = ({
     prevPage,
@@ -9,8 +10,9 @@ const PageTemplate = ({
     totalPages,
     maxShowNumbers = 5,
 }) => {
-    console.log("🚀 ~ file: pageTemplate.jsx:12 ~ currentPage:", currentPage)
-    console.log("🚀 ~ file: pageTemplate.jsx:11 ~ totalPages:", totalPages)
+    useScrollToTop(404);
+    // console.log("🚀 ~ file: pageTemplate.jsx:12 ~ currentPage:", currentPage)
+    // console.log("🚀 ~ file: pageTemplate.jsx:11 ~ totalPages:", totalPages)
     const [showArray, setShowArray] = useState(null);
 
     useEffect(() => {

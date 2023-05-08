@@ -4,16 +4,21 @@
     background-color: unset;
     width: 100%;
     height: fit-content;
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-start; */
     font-family: NotoSans-Regular;
+    display: block;
   }
   
-  .content-btn:has(:only-child){
+
+  /* .content-btn:has(:only) {
+    justify-content: flex-end;
+  } */
+  /* .content-btn:has(:only-child){
     justify-content: center;
   }
-  
+   */
   

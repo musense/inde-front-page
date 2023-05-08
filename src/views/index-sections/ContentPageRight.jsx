@@ -1,7 +1,7 @@
 import React from "react";
 import TitleImage from "./TitleImage";
 import styles from "./contentPageRight.module.css";
-import Tag from "./Tag";
+import Tag from "components/Tag/Tag";
 
 function ContentPageRight({ tags }) {
 

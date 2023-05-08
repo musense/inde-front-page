@@ -9,6 +9,7 @@
     width: 700px;
     user-select: none;
     font-family: NotoSans-Regular;
+    z-index: 1;
 }
 
 .page-wrapper button {

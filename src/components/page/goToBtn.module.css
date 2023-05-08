@@ -15,7 +15,12 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-
+.prev-btn{
+  float: left;
+}
+.next-btn{
+  float: right;
+}
 .prev-btn::before,
 .next-btn::before {
   content: "";

@@ -1,18 +1,15 @@
 /*eslint-disable*/
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 // import Tag from "views/index-sections/Tag";
 
 import styles from "./darkFooter.module.css";
 import IndexDecorationImage from "../../views/index-sections/IndexDecorationImage";
 
-function DarkFooter({ tags }) {
+function DarkFooter() {
 
   const location = useLocation()
-  console.log("🚀 ~ file: DarkFooter.jsx:12 ~ DarkFooter ~ location:", location)
-  // const [firstRowTags, setFirstRowTags] = useState(null);
-  // const [secondRowTags, setSecondRowTags] = useState(null);
-  // const [thirdRowTags, setThirdRowTags] = useState(null);
+  // console.log("🚀 ~ file: DarkFooter.jsx:12 ~ DarkFooter ~ location:", location)
 
   let footerClassName;
   if (location.pathname === "/") {
@@ -24,21 +21,6 @@ function DarkFooter({ tags }) {
   else {
     footerClassName = "not-index"
   }
-
-
-  // const setTagRows = (start = 0, end = arr.length, arr = []) => {
-
-  //   if (arr === null) return
-  //   if (arr.length === 0) return
-  //   if (start > arr.length) return
-  //   return arr.slice(start, end)
-  // }
-
-  // useEffect(() => {
-  // setFirstRowTags(setTagRows(0, 4, tags))
-  // setSecondRowTags(setTagRows(4, 7, tags))
-  // setThirdRowTags(setTagRows(7, 11, tags))
-  // }, [tags]);
 
   return (
     <>

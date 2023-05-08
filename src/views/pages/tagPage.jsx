@@ -1,46 +1,81 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useParams } from 'react-router-dom';
+// core components
 
 import styles from './../index-sections/category.module.css';
 import IndexDecorationImage from '../index-sections/IndexDecorationImage';
-import ConnectContent from './../index-sections/ConnectContent';
+import ConnectContent from '../index-sections/ConnectContent';
 
-import { getTitleContentsByCategory } from "assets/js/titleContents";
+// import ContentPageLeft from '../index-sections/ContentPageLeft';
+// import ContentPageConnect from '../index-sections/ContentPageConnect';
+// import ContentPageRight from '../index-sections/ContentPageRight';
+import { getTagsContents } from "assets/js/tagContents";
 import useScrollToTop from "components/hook/useScrollToTop";
 import PageTemplate from "components/page/pageTemplate";
 import DecoBackground from "components/DecoBackground";
 
 
-function Category() {
+// const MemoPage = React.memo(PageTemplate)
+
+
+
+function TagPage() {
   useScrollToTop();
 
+  const { tag } = useParams();
   const [__ALL_CONTENT__, setAllContent] = useState(null);
   const [viewContents, setViewContents] = useState(null);
-
   const currentPageRef = useRef(1);
+  const tagNameRef = useRef(tag)
   const [currPage, setCurrPage] = useState(currentPageRef.current);
   const [totalPages, setTotalPages] = useState(1);
 
-  const { categoryName } = useParams();
+
+  // const navigate = useNavigate();
+  // console.log("🚀 ~ file: category.jsx:33 ~ Category ~ categoryName:", categoryName)
+
+  // const findOneByIdAndReturnPrevNextID = (arr = [], categoryName = null) => {
+  //   if (categoryName === null || typeof categoryName !== 'string') return null;
+  //   const theIndex = arr.findIndex((item) => item._id === categoryName);
+  //   const theContent = arr[theIndex];
+  //   const prevID = theIndex === 0 ? null : arr[theIndex - 1]._id;
+  //   const nextID = theIndex === arr.length - 1 ? null : arr[theIndex + 1]._id;
+  //   setTitleContents(arr);
+  //   setAllContent(theContent);
+  //   setPrevID(prevID)
+  //   setNextID(nextID)
+  // };
+
 
   useEffect(() => {
-    console.log("🚀 ~ file: category.jsx:95 ~ Category ~ categoryName:", categoryName)
-    async function getTitleContentsByCategoryAsync() {
-      const payload = {
-        categoryName,
-        page: currentPageRef.current
-      };
-      const res = await getTitleContentsByCategory(payload)
-      const { data, currentPage, limit, totalCount, totalPages } = res;
-      console.log("🚀 ~ file: category.jsx:67 ~ useEffect ~ res:", res);
-      setAllContent(data);
-      setCurrPage(currentPageRef.current);
-      setTotalPages(Math.ceil(data.length / 6));
+    const payload = {
+      tagName: tag,
+      page: currentPageRef.current
     }
-    getTitleContentsByCategoryAsync()
-    
-  }, [categoryName]);
+   
+    payload && getTagsContents(payload)
+      .then(res => {
+        const { data, currentPage, limit, totalCount, totalPages } = res
+        // console.log("🚀 ~ file: category.jsx:67 ~ useEffect ~ res:", res)
+
+        setAllContent(data);
+        setCurrPage(currentPageRef.current);
+        setTotalPages(Math.ceil(data.length / 6));
+        // setTotalPages(totalPages);
+      })
+
+
+    // getTitleContentsByCategory(payload)
+    //   .then((titleContents) => {
+
+    //     console.log("🚀 ~ file: TagContentsPage.js:40 ~ .then ~ titleContents:", titleContents)
+    //     setAllContent(titleContents);
+    //     if (titleContents.length > 6) {
+    //       setViewContents(titleContents.slice(0, 6))
+    //     }
+    //   });
+  }, [tag]);
 
   useMemo(() => {
     if (__ALL_CONTENT__) {
@@ -82,18 +117,19 @@ function Category() {
       <img src={item.src} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
     </div>)
   };
+  
   return (
     <>
       <DecoBackground type={'category'} />
-      {banner(categoryName)}
+      {banner(tag)}
       <div className={`${styles['category-name']} title`}>
-        {categoryName}
+        #&nbsp;{tag}
       </div>
       <IndexDecorationImage marginTop={44} marginBottom={96} imageType={'line'} />
 
       {viewContents && (<div className={`${styles['main-content']}`}>
         {viewContents.map((content, index) =>
-          <ConnectContent key={index} index={index} content={content} category={categoryName} />
+          <ConnectContent key={index} index={index} content={content} category={tag} />
         )}
       </div>
       )}
@@ -110,11 +146,9 @@ function Category() {
       <IndexDecorationImage marginTop={73} marginBottom={83} imageType={'line'} />
     </>
   );
-
-
 }
 
-export default Category;
+export default TagPage;
 
 
 

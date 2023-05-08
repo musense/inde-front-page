@@ -14,19 +14,6 @@
   height: 30px;
 }
 
-.navbar a {
-  box-sizing: border-box;
-  text-decoration: none;
-  font-size: 23px;
-  color: var(--theme-text);
-}
-
-.navbar a:hover,
-.navbar a.active {
-  text-decoration: none;
-  /* font-size: 27px; */
-  color: #ebbc29;
-}
 
 /* *:has(>.container) {
   margin: 0;
@@ -42,17 +29,6 @@
   align-items: flex-end;
 }
 
-
-.navbar-logo {
-  height: 66px;
-  width: 404px;
-  background-image: url('assets/img/logo.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  top: 0;
-  left: 0;
-  cursor: pointer;
-}
 
 .nav-btn-wrapper {
   display: flex;

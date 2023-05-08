@@ -1,8 +1,9 @@
 import React from "react";
-import Tag from "./Tag";
+import Tag from "components/Tag/Tag";
 import { Link } from "react-router-dom";
 import GoToContentPage from "components/page/goToContentPage";
 import styles from './contentPageLeft.module.css'
+import DecoBackground from "components/DecoBackground";
 // import DateTimeStamp from "components/Date/DateTimeStamp";
 
 const item = {
@@ -12,13 +13,15 @@ const item = {
 
 function ContentPageLeft({
   content,
-  prevID, nextID,
-  prevTitle, nextTitle,
+  prevInfo,
+  nextInfo,
   category }) {
 
   return content && (
     <div className={styles['content-page']}>
+
       <div className={styles['left-content']}>
+        <DecoBackground type={'content'} />
         <div className={styles['title-view']}>
           <Link className={styles['main-title-decoration']} to={`/c/${content.categories.name}`}>Return</Link>
           <h1 className={styles['main-title']}>{content.title}</h1>
@@ -35,13 +38,11 @@ function ContentPageLeft({
               className={styles['title-main-content']}
               dangerouslySetInnerHTML={{ __html: content.htmlContent }}
             />
-            <GoToContentPage
+            {(prevInfo || nextInfo) && <GoToContentPage
               categoryName={content.categories.name}
-              prevID={prevID}
-              prevTitle={prevTitle}
-              nextID={nextID}
-              nextTitle={nextTitle}
-            />
+              prevInfo={prevInfo}
+              nextInfo={nextInfo}
+            />}
           </div>
 
 
