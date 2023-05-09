@@ -12,7 +12,7 @@ import useScrollToTop from "components/hook/useScrollToTop";
 
 import InterestedContents from './InterestedContents';
 
-import { TitleContext } from "views/index";
+import { TitleContext } from "views/Index";
 
 const item = {
   src: '/img/content/banner.png',
