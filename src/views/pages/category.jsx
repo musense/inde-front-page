@@ -9,7 +9,10 @@ import ConnectContent from './../index-sections/ConnectContent';
 import { getTitleContentsByCategory } from "assets/js/titleContents";
 import useScrollToTop from "components/hook/useScrollToTop";
 import PageTemplate from "components/page/pageTemplate";
-import DecoBackground from "components/DecoBackground";
+import DecoBackground from "components/DecoBackground/DecoBackground";
+import Banner from '../../components/Banner/Banner';
+
+
 
 
 function Category() {
@@ -69,23 +72,10 @@ function Category() {
     // setCurrPage(parseInt(page))
   }
 
-  const banner = (category) => {
-    const checkList = ['lottery', 'sports', 'poker', 'matka']
-    if (!checkList.some(mainCategory => mainCategory === category)) {
-      category = 'banner'
-    }
-    const item = {
-      src: `/public/img/category/${category}.png`,
-    }
-
-    return (<div className={`section ${styles.section}`}>
-      <img src={item.src} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
-    </div>)
-  };
   return (
     <>
       <DecoBackground type={'category'} />
-      {banner(categoryName)}
+      <Banner category={categoryName} />
       <div className={`${styles['category-name']} title`}>
         {categoryName}
       </div>

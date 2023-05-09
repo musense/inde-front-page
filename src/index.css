@@ -106,15 +106,15 @@ button:focus-visible {
 
 @font-face {
   font-family: Lobster-Regular;
-  src: url('/public/fonts/Lobster-Regular.ttf');
+  src: url('/fonts/Lobster-Regular.ttf');
 }
 @font-face {
   font-family: NotoSans-Medium;
-  src: url('/public/fonts/NotoSansSC-Medium.otf');
+  src: url('/fonts/NotoSansSC-Medium.otf');
 }
 @font-face {
   font-family: NotoSans-Regular;
-  src: url('/public/fonts/NotoSansSC-Regular.otf');
+  src: url('/fonts/NotoSansSC-Regular.otf');
 }
 
 

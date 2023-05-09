@@ -3,11 +3,11 @@ import Tag from "components/Tag/Tag";
 import { Link } from "react-router-dom";
 import GoToContentPage from "components/page/goToContentPage";
 import styles from './contentPageLeft.module.css'
-import DecoBackground from "components/DecoBackground";
+import DecoBackground from "components/DecoBackground/DecoBackground";
 // import DateTimeStamp from "components/Date/DateTimeStamp";
 
 const item = {
-  src: '/public/img/content/image.png',
+  src: '/img/content/image.png',
   altText: `The Events You Can't Miss in Cricket This Year | All You Need to Know About Cricket`,
 };
 

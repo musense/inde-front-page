@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useMemo, useState, useEffect, useRef } from 'react'
 import styles from './pageTemplate.module.css'
 import useScrollToTop from '../hook/useScrollToTop';
 
@@ -10,23 +10,18 @@ const PageTemplate = ({
     totalPages,
     maxShowNumbers = 5,
 }) => {
-    useScrollToTop(404);
-    // console.log("🚀 ~ file: pageTemplate.jsx:12 ~ currentPage:", currentPage)
-    // console.log("🚀 ~ file: pageTemplate.jsx:11 ~ totalPages:", totalPages)
-    const [showArray, setShowArray] = useState(null);
 
+    const [showArray, setShowArray] = useState(null);
+    const currentPageRef = useRef(null)
+    const skip = !!currentPageRef.current && currentPageRef.current !== currentPage
+    useScrollToTop(404, skip);
     useEffect(() => {
         const array = Array.from(Array(maxShowNumbers), (_, index) => index - Math.floor(maxShowNumbers / 2))
             .map(item => parseInt(item) + parseInt(currentPage));
         setShowArray(array);
-
+        currentPageRef.current = currentPage
     }, [maxShowNumbers, currentPage]);
-    // const showArray = useMemo(() => {
-    //     console.log("🚀 ~ file: pageTemplate.jsx:17 ~ currentPage:", currentPage)
-    //     return Array.from(Array(maxShowNumbers), (_, index) => index - Math.floor(maxShowNumbers / 2))
-    //         .map(item => parseInt(item) + parseInt(currentPage))
-    // }, [maxShowNumbers, currentPage])
-    // console.log("🚀 ~ file: pageTemplate.jsx:15 ~ showArray ~ showArray:", showArray)
+
     return (
         <div className={styles['page-wrapper']}>
             <button onClick={() => prevPage()} value="<"

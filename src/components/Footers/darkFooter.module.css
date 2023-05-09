@@ -8,7 +8,7 @@
   justify-content: space-evenly;
   box-sizing: border-box;
   align-items: center;
-  background-image: url(/src/assets/img/footer/background.png);
+  background-image: url(assets/img/footer/background.png);
   margin-top: 60px;
   z-index: 0;
 }
@@ -43,7 +43,7 @@
   bottom: 137px;
   left: 50%;
   transform: translateX(-50%);
-  background-image: url(/src/assets/img/footer/flower.png);
+  background-image: url(assets/img/footer/flower.png);
   height: 944px;
   width: 944px;
   display: block;

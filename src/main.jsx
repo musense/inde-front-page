@@ -1,7 +1,8 @@
-import React, { StrictMode } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from "react-router-dom";
 import App from './App.jsx'
+
 
 import 'assets/css/bootstrap.min.css';
 // import 'assets/css/now-ui-kit.min.css';

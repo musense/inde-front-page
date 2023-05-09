@@ -6,19 +6,19 @@ import IndexViewBlock from "components/IndexViewBlock/IndexViewBlock";
 import styles from "./indexView.module.css";
 
 const item0 = {
-    src: '/public/img/index/image_1.png',
+    src: '/img/index/image_1.png',
     altText: 'Lottery',
 };
 const item1 = {
-    src: '/public/img/index/image_2.png',
+    src: '/img/index/image_2.png',
     altText: 'Sports',
 };
 const item2 = {
-    src: '/public/img/index/image_3.png',
+    src: '/img/index/image_3.png',
     altText: 'Poker',
 };
 const item3 = {
-    src: '/public/img/index/image_4.png',
+    src: '/img/index/image_4.png',
     altText: 'Matka',
 };
 

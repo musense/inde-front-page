@@ -13,12 +13,8 @@ import ConnectContent from '../index-sections/ConnectContent';
 import { getTagsContents } from "assets/js/tagContents";
 import useScrollToTop from "components/hook/useScrollToTop";
 import PageTemplate from "components/page/pageTemplate";
-import DecoBackground from "components/DecoBackground";
-
-
-// const MemoPage = React.memo(PageTemplate)
-
-
+import DecoBackground from "components/DecoBackground/DecoBackground";
+import Banner from '../../components/Banner/Banner';
 
 function TagPage() {
   useScrollToTop();
@@ -53,7 +49,7 @@ function TagPage() {
       tagName: tag,
       page: currentPageRef.current
     }
-   
+
     payload && getTagsContents(payload)
       .then(res => {
         const { data, currentPage, limit, totalCount, totalPages } = res
@@ -104,24 +100,10 @@ function TagPage() {
     // setCurrPage(parseInt(page))
   }
 
-  const banner = (category) => {
-    const checkList = ['lottery', 'sports', 'poker', 'matka']
-    if (!checkList.some(mainCategory => mainCategory === category)) {
-      category = 'banner'
-    }
-    const item = {
-      src: `/public/img/category/${category}.png`,
-    }
-
-    return (<div className={`section ${styles.section}`}>
-      <img src={item.src} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
-    </div>)
-  };
-  
   return (
     <>
       <DecoBackground type={'category'} />
-      {banner(tag)}
+      <Banner />
       <div className={`${styles['category-name']} title`}>
         #&nbsp;{tag}
       </div>

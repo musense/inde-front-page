@@ -15,7 +15,7 @@ import InterestedContents from './InterestedContents';
 import { TitleContext } from "views/index";
 
 const item = {
-  src: '/public/img/content/banner.png',
+  src: '/img/content/banner.png',
   altText: 'The most popular games in India',
   title: 'The most popular games in India',
 };

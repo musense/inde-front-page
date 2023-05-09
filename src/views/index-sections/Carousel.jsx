@@ -13,27 +13,27 @@ import {
 
 const items = [
   {
-    src: "/public/img/index/banner.png",
+    src: "/img/index/banner.png",
     altText: "The most popular games in India",
   },
   {
-    src: "/public/img/index/background.png",
+    src: "/img/index/background.png",
     altText: "The most popular games in Taiwan",
   },
   {
-    src: "/public/img/index/image_1.png",
+    src: "/img/index/image_1.png",
     altText: "The most popular games in New York",
   },
   {
-    src: "/public/img/index/image_2.png",
+    src: "/img/index/image_2.png",
     altText: "The most popular games in Thailand",
   },
   {
-    src: "/public/img/index/image_3.png",
+    src: "/img/index/image_3.png",
     altText: "The most popular games in Japan",
   },
   {
-    src: "/public/img/index/image_4.png",
+    src: "/img/index/image_4.png",
     altText: "The most popular games in America",
   },
 ];
