@@ -1,6 +1,7 @@
 .deco-background {
     --category-background-transform: translateY(-50%);
     inset: 0;
+    z-index: -1;
 }
 
 .deco-background.fixed {

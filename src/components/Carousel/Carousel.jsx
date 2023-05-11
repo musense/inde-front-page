@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useContext, useEffect, useState, useRef } from "react";
 import styles from './carousel.module.css'
 // reactstrap components
 import {
@@ -11,11 +11,19 @@ import {
   CarouselControl
 } from "reactstrap";
 
+import { TitleContext } from "views/Index";
+
+const mobileItem = {
+  src: "/img/mobile/index/banner.png",
+  altText: "The most popular games in India",
+}
+
+const desktopItem = {
+  src: "/img/index/banner.png",
+  altText: "The most popular games in India",
+}
 const items = [
-  {
-    src: "/img/index/banner.png",
-    altText: "The most popular games in India",
-  },
+
   {
     src: "/img/index/background.png",
     altText: "The most popular games in Taiwan",
@@ -40,6 +48,25 @@ const items = [
 
 
 function CarouselSection() {
+  const [state, dispatch] = useContext(TitleContext);
+  console.log("🚀 ~ file: Carousel.jsx:52 ~ CarouselSection ~ state:", state)
+
+  const carouselRef = useRef(null)
+  const [carouselItems, setCarouselItems] = useState(null);
+  useEffect(() => {
+    if (!state.clientWidth) return
+
+    if (carouselRef.current === null) {
+      carouselRef.current = 'carousel'
+      if (state.clientWidth > 400) {
+        items.splice(0, 0, desktopItem)
+      } else {
+        items.splice(0, 0, mobileItem)
+        console.log("🚀 ~ file: Carousel.jsx:52 ~ useEffect ~ items:", items)
+      }
+      setCarouselItems(items)
+    }
+  }, [state.clientWidth]);
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [animating, setAnimating] = React.useState(false);
 
@@ -68,7 +95,9 @@ function CarouselSection() {
 
 
   const slides = useMemo(() => {
-    return items.map((item) => {
+    if (!carouselItems) return
+    const mappedImages = [...carouselItems];
+    return mappedImages.map((item) => {
       return (
         <CarouselItem
           onExiting={onExiting}
@@ -76,18 +105,19 @@ function CarouselSection() {
           key={item.src}
           className={styles.carouselItem}
         >
-          <img src={item.src} alt={item.altText} className={styles.carouselImg} />
+          <img src={item.src} alt={item.altText} className={styles.carouselImg} width={'100%'} />
           {/* <div className="carousel-caption d-none d-md-block">
             <h5>{item.caption}</h5>
           </div> */}
         </CarouselItem>
       );
     });
-  }, [])
+  }, [carouselItems])
 
-  return (
+  return carouselItems && (
     <>
       <Carousel
+        id={carouselRef}
         activeIndex={activeIndex}
         next={next}
         previous={previous}

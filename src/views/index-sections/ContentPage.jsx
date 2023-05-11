@@ -15,7 +15,7 @@ import InterestedContents from './InterestedContents';
 import { TitleContext } from "views/Index";
 
 const item = {
-  src: '/img/content/banner.png',
+  src: '/img/mobile/index/banner.png',
   altText: 'The most popular games in India',
   title: 'The most popular games in India',
 };
@@ -100,7 +100,7 @@ function ContentPage() {
   return (
     <>
       <div className={`section ${styles.section}`}>
-        <img src={item.src} alt={item.altText} title={item.title} />
+        <img src={item.src} alt={item.altText} title={item.title} width={'100%'} />
       </div>
 
 

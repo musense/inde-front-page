@@ -14,7 +14,10 @@
   /* margin-top: var(--navbar-height); */
   box-shadow: 0px 3px 9.5px 0.5px rgba(77, 55, 55, 0.5);
 }
-
+.section img{
+  object-fit: cover;
+  object-position: center;
+}
 .category-name {
   font-family: Lobster-Regular;
   font-size: 90px;
