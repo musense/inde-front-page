@@ -12,7 +12,7 @@
     z-index: 1;
 }
 
-.page-wrapper a ,
+.page-wrapper a,
 .page-wrapper button {
     background-color: transparent;
     color: var(--theme-red);
@@ -23,6 +23,7 @@
     width: 46px;
     margin-top: 0;
     margin-bottom: 0;
+    text-align: center;
 }
 
 .page-wrapper p {
@@ -33,12 +34,12 @@
     width: 46px;
 }
 
-.page-wrapper a:first-child ,
+.page-wrapper a:first-child,
 .page-wrapper button:first-child {
     margin-right: auto;
 }
 
-.page-wrapper a:last-child ,
+.page-wrapper a:last-child,
 .page-wrapper button:last-child {
     margin-left: auto;
 }
@@ -47,19 +48,20 @@
     text-decoration: none;
     color: currentColor;
 }
+
 .page-wrapper button:focus {
     border: unset;
     outline: unset;
 }
 
-a.active ,
+a.active,
 button.active {
     font-family: NotoSans-Medium;
     font-weight: bold;
     /* color: var(--theme-text); */
 }
 
-a.displayNone ,
+a.displayNone,
 button.displayNone {
     opacity: 0;
     pointer-events: none;
@@ -75,7 +77,7 @@ button.displayNone {
     }
 
 
-    .page-wrapper a ,
+    .page-wrapper a,
     .page-wrapper button {
         /* color: var(--theme-red); */
         font-size: 1.5rem;
@@ -100,12 +102,12 @@ button.displayNone {
         outline: unset;
     }*/
 
-    a.active ,
+    a.active,
     button.active {
         font-size: 2rem;
     }
 
-    a.displayNone ,
+    a.displayNone,
     button.displayNone {
         opacity: 0;
         pointer-events: none;
