@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './newTitle.module.css'
-import NavigateContainer from "./NavigateContainer";
+import NavigateContainer from "components/NavigateContainer/NavigateContainer";
 
 const ranking = new Map([
     [0, '1st'],
@@ -22,6 +22,7 @@ function HotContent({ index, content }) {
             key={index}
             index={index}
             contentID={content._id}
+            styles={styles}
             customClassName={'hot-container'}
         >
             <div className={styles['title-mainImage']} />

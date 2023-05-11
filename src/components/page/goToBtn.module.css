@@ -15,12 +15,15 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.prev-btn{
+
+.prev-btn {
   float: left;
 }
-.next-btn{
+
+.next-btn {
   float: right;
 }
+
 .prev-btn::before,
 .next-btn::before {
   content: "";
@@ -44,4 +47,35 @@
 .next-btn::before {
   background-image: url('assets/img/content/next.png');
   margin-left: auto;
+}
+
+
+@media screen and (max-width: 400px) {
+
+  .prev-btn,
+  .next-btn {
+    float: unset;
+    padding: unset;
+    width: 100%;
+    max-height: 5rem;
+    height: fit-content;
+    max-width: unset;
+    overflow: visible;
+    float: unset;
+
+    max-height: unset;
+    -webkit-line-clamp: unset;
+  }
+
+  .prev-btn::before,
+  .next-btn::before {
+    position: absolute;
+    width: 5rem;
+    height: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -8rem;
+    margin: unset;
+  }
+
 }

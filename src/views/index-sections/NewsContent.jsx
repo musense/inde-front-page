@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './newTitle.module.css'
-import NavigateContainer from "./NavigateContainer";
+import NavigateContainer from "components/NavigateContainer/NavigateContainer";
 
 function NewsContent({ index, content }) {
     return (

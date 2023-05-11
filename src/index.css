@@ -41,18 +41,30 @@
 }
 
 
-#topSection{
+#topSection {
   position: absolute;
   inset: 0;
 }
+
+#category-anchor{
+  position: absolute;
+  top: 251px;
+  left: 0;
+}
+
 .title {
   user-select: none;
+  font-family: Lobster-Regular;
+  font-size: 90.5px;
+  letter-spacing: 9.05px;
 }
+
 a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -63,7 +75,7 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 100%;
   overflow-x: hidden;
 }
 
@@ -83,9 +95,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -96,9 +110,11 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
@@ -108,10 +124,12 @@ button:focus-visible {
   font-family: Lobster-Regular;
   src: url('/fonts/Lobster-Regular.ttf');
 }
+
 @font-face {
   font-family: NotoSans-Medium;
   src: url('/fonts/NotoSansSC-Medium.otf');
 }
+
 @font-face {
   font-family: NotoSans-Regular;
   src: url('/fonts/NotoSansSC-Regular.otf');
@@ -128,5 +146,29 @@ button:focus-visible {
     --theme-font-2s: 0.9em;
     --theme-font-3s: 0.75em;
     --theme-font-4s: 0.6em;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .carousel-control-prev,
+  .carousel-control-next,
+  .carousel-indicators {
+    display: none;
+  }
+
+  #topSection {
+    top: 0;
+    overflow-x: hidden;
+  }
+
+  #category-anchor{
+    top: 11rem;
+  }
+
+  .title {
+    font-family: Lobster-Regular;
+    font-size: 2.5rem;
+    letter-spacing: 0.2rem;
+    height: fit-content;
   }
 }

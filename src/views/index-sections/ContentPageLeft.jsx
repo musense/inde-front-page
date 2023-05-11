@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import GoToContentPage from "components/page/goToContentPage";
 import styles from './contentPageLeft.module.css'
 import DecoBackground from "components/DecoBackground/DecoBackground";
+import IndexDecorationImage from "components/IndexDecorationImage/IndexDecorationImage";
 // import DateTimeStamp from "components/Date/DateTimeStamp";
 
 const item = {
@@ -24,6 +25,12 @@ function ContentPageLeft({
         <DecoBackground type={'content'} />
         <div className={styles['title-view']}>
           <Link className={styles['main-title-decoration']} to={`/c/${content.categories.name}`}>Return</Link>
+          <div className={styles['contentPageLeft-decoration-image-wrapper']}>
+            <IndexDecorationImage
+              marginTop={'2rem'}
+              marginBottom={'2rem'}
+              imageType={'line'} />
+          </div>
           <h1 className={styles['main-title']}>{content.title}</h1>
         </div>
         <div className={styles['main-content']}>
@@ -44,18 +51,31 @@ function ContentPageLeft({
               nextInfo={nextInfo}
             />}
           </div>
-
+{/* 
+          <div className={styles['contentPageLeft-decoration-image-wrapper']}>
+            <IndexDecorationImage
+              marginTop={66}
+              marginBottom={52}
+              imageType={'line'}
+            />
+            <IndexDecorationImage
+              marginTop={'0rem'}
+              marginBottom={'0rem'}
+              imageType={'line'} />
+          </div> */}
 
           <div className={styles['content-side']}>
             <div className={styles['content-advertise']}></div>
             <div className={styles['content-tags']}>
               <div>Tag</div>
-              {content.tags.map((tag, index) =>
-                <Tag key={index} tag={tag} />
-              )}
+              <div>
+                {content.tags.map((tag, index) =>
+                  <Tag key={index} tag={tag} />
+                )}
+              </div>
             </div>
           </div>
-          {/* <DateTimeStamp date={content.createdAt} /> */}
+
         </div>
 
       </div>

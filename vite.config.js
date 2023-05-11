@@ -13,6 +13,7 @@ export default defineConfig({
       'components': resolve(rootDir, 'src/components/'),
       'views': resolve(rootDir, 'src/views/'),
       'store': resolve(rootDir, 'src/store/'),
+      'hook': resolve(rootDir, 'src/hook/'),
     }
   },
   server: {

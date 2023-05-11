@@ -30,16 +30,32 @@
 
 
 
-@media screen and (max-width: 768px) {
-  .image {
-    width: 80vw;
+@media screen and (max-width: 400px) {
+
+  .image-wrapper {
+    width: 100%;
+    /* padding: 0 2rem; */
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .cut{
-    margin: 10vw auto;
+  .image {
+    background-size: contain;
   }
-  .recommend,
-  .connect {
+
+  .line,
+  .thin-line {
+    width: 87vw;
+    height: 1.6rem;
     margin: 0 auto;
   }
+
+  .line {
+    background-image: url(/src/assets/img/mobile/category/line.png);
+  }
+
+  .thin-line {
+    background-image: url('assets/img/mobile/index/thin-line.png');
+  }
+
 }

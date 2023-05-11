@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import IndexDecorationImage from './IndexDecorationImage';
+import IndexDecorationImage from "components/IndexDecorationImage/IndexDecorationImage";
 import { useOutletContext } from 'react-router-dom';
 import { getTitleContentsByTag } from 'assets/js/titleContents';
 import styles from './tagContentPage.module.css';
 import ContentPageRight from './ContentPageRight';
-import ConnectContent from './ConnectContent';
-import useScrollToTop from 'components/hook/useScrollToTop';
+import ConnectContent from 'components/ConnectContent/ConnectContent';
+import useScrollToTop from 'hook/useScrollToTop';
 
 // const item0 = {
 //   src: require('assets/img/bg1.png'),
@@ -29,7 +29,7 @@ function TagContentsPage() {
   useEffect(() => {
     getTitleContentsByTag(tagName)
       .then(({res}) => {
-        console.log("🚀 ~ file: TagContentsPage.js:40 ~ .then ~ titleContents:", titleContents)
+        console.log("🚀 ~ file TagContentsPage.js:40 ~ .then ~ titleContents:", titleContents)
         const { data } = res
         setTitleContents(data);
       });
