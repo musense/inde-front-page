@@ -29,7 +29,7 @@ function TagPage() {
 
 
   // const navigate = useNavigate();
-  console.log("🚀 ~ file category.jsx:33 ~ Category ~ categoryName:", categoryName)
+  // console.log("🚀 ~ file category.jsx:33 ~ Category ~ categoryName:", categoryName)
 
   // const findOneByIdAndReturnPrevNextID = (arr = [], categoryName = null) => {
   //   if (categoryName === null || typeof categoryName !== 'string') return null;
