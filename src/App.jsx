@@ -3,19 +3,19 @@ import React, { useEffect } from "react";
 import Index from "./views/Index";
 import IndexView from "./views/pages/IndexView.jsx";
 import Category from "./views/pages/category";
-
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
-import TagContentsPage from "./views/index-sections/TagContentsPage";
+import { Routes, Route, useNavigate, Navigate, useLocation } from "react-router-dom";
 import ContentPage from "./views/index-sections/ContentPage";
 import TagPage from "./views/pages/tagPage";
 
-export default function App() {
-    const navigate = useNavigate()
 
+export default function App() {
+
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    localStorage.setItem('pathname', location.pathname)
     useEffect(() => {
-        navigate('/sports')
-        // navigate('/content/63e31e0c1ab9109e2432270f')
-        // navigate('/content/tag/iPhone')
+        navigate(localStorage.getItem('pathname'))
     }, []);
 
     return (
@@ -26,7 +26,6 @@ export default function App() {
                     <Route path="/c/:categoryName" element={<Category />} />
                     <Route path="/c/:categoryName/p/:id" element={<ContentPage />} />
                     <Route path="/t/:tag" element={<TagPage />} />
-                    {/* <Route path="content/tag/:tagName" element={<TagContentsPage />} /> */}
                 </Route>
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>

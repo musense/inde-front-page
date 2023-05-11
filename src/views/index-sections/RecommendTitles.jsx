@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./recommendTitles.module.css";
-import NavigateContainer from "./NavigateContainer";
+import NavigateContainer from "components/NavigateContainer/NavigateContainer";
 
 function RecommendTitles({ contents }) {
 
@@ -28,6 +28,7 @@ function RecommendTitles({ contents }) {
                                     key={index}
                                     index={index}
                                     contentID={recommend._id}
+                                    styles={styles}
                                     customClassName={"flex-box"}>
 
                                     <div className={styles['title-mainImage']} />

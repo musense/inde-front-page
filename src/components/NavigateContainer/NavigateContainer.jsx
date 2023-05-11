@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './contentPage.module.css'
+import mainStyles from './navigateContainer.module.css'
 import { useNavigate } from "react-router-dom";
 
 function NavigateContainer({
@@ -7,15 +7,20 @@ function NavigateContainer({
     contentID,
     children,
     index,
+    styles,
     customClassName = "title-container" }) {
     const navigate = useNavigate()
     function goToContent(contentID) {
         if (contentID === null) return
         navigate(`/c/${category}/p/${contentID}`)
     }
+
+    if (styles === null || styles === '' || styles === undefined) {
+        styles = mainStyles
+    }
+    
     return (<div
         className={styles[customClassName]}
-        key={index}
         onClick={() => goToContent(contentID)}
     >
         {children}

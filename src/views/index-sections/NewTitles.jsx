@@ -11,7 +11,7 @@ import TitleImage from "./TitleImage";
 
 
 function NewTitles({ contents }) {
-  // console.log(`TITLE_CONTENTS: ${TITLE_CONTENTS}`)
+  console.log(`TITLE_CONTENTS: ${TITLE_CONTENTS}`)
 
   const [newContents, setNewContents] = useState(null);
   const [hotContents, setHotContents] = useState(null);
@@ -19,7 +19,7 @@ function NewTitles({ contents }) {
   const navigate = useNavigate()
   const mounted = useRef();
   const sortByAndReturn = (arr = [], key = null) => {
-    // console.log(arr);
+    console.log(arr);
 
     if (key === null) return arr
     if (key && typeof key === 'string' && key.toLowerCase().indexOf('date') !== -1) {
@@ -30,7 +30,7 @@ function NewTitles({ contents }) {
 
   useEffect(() => {
     // console.group('NewTitle');
-    // console.log(contents);
+    console.log(contents);
     // console.groupEnd('NewTitle');
     if (!mounted.current) {
       mounted.current = true;

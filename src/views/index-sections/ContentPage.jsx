@@ -4,15 +4,15 @@ import React, { useEffect, useState, useReducer, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 // core components
 import styles from './contentPage.module.css';
-import IndexDecorationImage from './IndexDecorationImage';
+import IndexDecorationImage from "components/IndexDecorationImage/IndexDecorationImage";
 
 import ContentPageLeft from './ContentPageLeft';
 import { getTitleContentsByID, getRelatedArticles, getTitleContents } from "assets/js/titleContents";
-import useScrollToTop from "components/hook/useScrollToTop";
+import useScrollToTop from "hook/useScrollToTop";
 
 import InterestedContents from './InterestedContents';
 
-import { TitleContext } from "views/index";
+import { TitleContext } from "views/Index";
 
 const item = {
   src: '/img/content/banner.png',
@@ -23,7 +23,7 @@ function ContentPage() {
   useScrollToTop(664);
 
   const [state, dispatch] = useContext(TitleContext);
-  console.log("🚀 ~ file: ContentPage.jsx:26 ~ ContentPage ~ state:", state)
+  console.log("🚀 ~ file ContentPage.jsx:26 ~ ContentPage ~ state:", state)
 
   const [_theContent_, setTheContent] = useState(null);
   const [prevInfo, setPrevInfo] = useState(null);
@@ -40,15 +40,15 @@ function ContentPage() {
       _id: content._id,
       title: content.title,
     })
-
-    const prevContent = arr.find(a => a.serialNumber === serialNumber + 1)
-    const nextContent = arr.find(a => a.serialNumber === serialNumber - 1)
+    //* basically, the bigger the serialNumber is, the newer the editor is
+    const prevContent = arr.find(a => a.serialNumber === serialNumber - 1)
+    const nextContent = arr.find(a => a.serialNumber === serialNumber + 1)
 
     const prevInfo = prevContent ? mapContentInto(prevContent) : null
     const nextInfo = nextContent ? mapContentInto(nextContent) : null
 
-    console.log("🚀 ~ file: ContentPage.jsx:69 ~ findOneByIdAndReturnPrevNextID ~ prevInfo:", prevInfo)
-    console.log("🚀 ~ file: ContentPage.jsx:69 ~ findOneByIdAndReturnPrevNextID ~ nextInfo:", nextInfo)
+    console.log("🚀 ~ file ContentPage.jsx:69 ~ findOneByIdAndReturnPrevNextID ~ prevInfo:", prevInfo)
+    console.log("🚀 ~ file ContentPage.jsx:69 ~ findOneByIdAndReturnPrevNextID ~ nextInfo:", nextInfo)
     setPrevInfo(prevInfo)
     setNextInfo(nextInfo)
   };
@@ -61,12 +61,13 @@ function ContentPage() {
         _id: id,
       }
       const theContent = await getTitleContentsByID(payload);
-      console.log("🚀 ~ file: ContentPage.jsx:60 ~ getTitleContentsByIDAsync ~ theContent:", theContent)
+      console.log("🚀 ~ file ContentPage.jsx:60 ~ getTitleContentsByIDAsync ~ theContent:", theContent)
       setTheContent(theContent);
       // const { data } = titleContents
+
       if (state.contents === null) {
         const res = await getTitleContents();
-        console.log("🚀 ~ file: ContentPage.jsx:74 ~ getTitleContentsByIDAsync ~ res:", res)
+        console.log("🚀 ~ file ContentPage.jsx:74 ~ getTitleContentsByIDAsync ~ res:", res)
         const { data } = res
         findOneByIdAndReturnPrevNextID(data, theContent.serialNumber);
         dispatch({
@@ -99,14 +100,23 @@ function ContentPage() {
         nextInfo={nextInfo}
         category={categoryName}
       />
-      <IndexDecorationImage
-        marginTop={66}
-        marginBottom={52}
-        imageType={'line'}
-      />
+
+      <div className={styles['contentPage-decoration-image-wrapper-pc']}>
+        <IndexDecorationImage
+          marginTop={66}
+          marginBottom={52}
+          imageType={'line'} />
+      </div>
 
       <InterestedContents
         interestedContents={interestedContents} />
+
+      <div className={styles['contentPage-decoration-image-wrapper-mobile']}>
+        <IndexDecorationImage
+          marginTop={'2rem'}
+          marginBottom={'2rem'}
+          imageType={'line'} />
+      </div>
     </>
   );
 }

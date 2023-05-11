@@ -1,9 +1,12 @@
-import useScrollToTop from "components/hook/useScrollToTop";
-import React from "react";
-import Carousel from "../index-sections/Carousel";
+import useScrollToTop from "hook/useScrollToTop";
+import React, { useContext, useEffect } from "react";
+import Carousel from "components/Carousel/Carousel";
 
 import IndexViewBlock from "components/IndexViewBlock/IndexViewBlock";
 import styles from "./indexView.module.css";
+import IndexDecorationImage from "components/IndexDecorationImage/IndexDecorationImage";
+
+import { TitleContext } from "views/Index";
 
 const item0 = {
     src: '/img/index/image_1.png',
@@ -23,13 +26,36 @@ const item3 = {
 };
 
 function IndexView() {
-    useScrollToTop();
+    const [state, dispatch] = useContext(TitleContext);
+    window.addEventListener("load", function () {
+        setTimeout(function () {
+            window.scrollTo(0, 1);
+        }, 0);
+    });
+    useEffect(() => {
+        dispatch({
+            type: 'SET_WINDOW_SIZE',
+            payload: {
+                width: window.innerWidth || document.documentElement.clientWidth ||
+                    document.body.clientWidth,
+                height: window.innerHeight || document.documentElement.clientHeight ||
+                    document.body.clientHeigh
+            }
+        })
+    }, []);
 
     return (
         <>
-     
+
             <Carousel />
             <div className={styles['index-fixed-background']} />
+            <div className={styles['index-decoration-image-wrapper']}>
+                <IndexDecorationImage
+                    marginTop={'3rem'}
+                    marginBottom={'0rem'}
+                    imageType={'thin-line'}
+                />
+            </div>
             <IndexViewBlock
                 image={item0}
                 title={'Lottery'}
@@ -46,12 +72,19 @@ function IndexView() {
                 title={'Poker'}
                 article={`Poker is widely regarded as the most popular card game in the world, offering players endless hours of entertainment. From Teen Patti and Rummy to Andar Bahar, Baccarat, Blackjack, and Texas Hold'em, online casinos offer a wide variety of poker games to cater to players' preferences. The game's simplicity lies in its straightforward combinations...`}
             />
-              <IndexViewBlock
+            <IndexViewBlock
                 reverse
                 image={item3}
                 title={'Matka'}
                 article={`Matka is considered to be one of the most popular lotteries in India. It offers a range of gaming features, including Jodi, Sangam, and Patti, all of which have Open and Close options. Players can also choose from Big, Small, Odd, and Even options. For those who prefer a fast-paced game, High Speed Matka is available, with numbers drawn every 10 minutes.`}
             />
+            {/* <div className={styles['index-decoration-image-wrapper']}>
+                <IndexDecorationImage
+                    marginTop={'3rem'}
+                    marginBottom={'0rem'}
+                    imageType={'line'}
+                />
+            </div> */}
         </>
 
     );

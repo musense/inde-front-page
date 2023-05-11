@@ -1,34 +1,57 @@
-import React, { useMemo, useState, useEffect, useRef } from 'react'
+import React, { useMemo, useState, useEffect, useRef, useContext } from 'react'
 import styles from './pageTemplate.module.css'
-import useScrollToTop from '../hook/useScrollToTop';
+import useScrollToTop from 'hook/useScrollToTop';
+
+import { TitleContext } from 'views/Index';
+import { Link } from 'react-router-dom';
 
 const PageTemplate = ({
     prevPage,
     nextPage,
     setPage,
-    currentPage,
+    currentPage: currentPageProp,
     totalPages,
     maxShowNumbers = 5,
 }) => {
 
+    const [state, dispatch] = useContext(TitleContext);
+
     const [showArray, setShowArray] = useState(null);
     const currentPageRef = useRef(null)
+    const currentPage = parseInt(currentPageProp)
+    console.log("🚀 ~ file pageTemplate.jsx:16 ~ totalPages:", totalPages)
+    console.log("🚀 ~ file pageTemplate.jsx:16 ~ currentPage:", currentPage)
+    console.log("🚀 ~ file pageTemplate.jsx:16 ~ Math.ceil(maxShowNumbers / 2):", Math.ceil(maxShowNumbers / 2))
     const skip = !!currentPageRef.current && currentPageRef.current !== currentPage
-    useScrollToTop(404, skip);
+
+    const anchorButton = ({ cb, styles, label, index = null }) => {
+        if (index === null) {
+            return (<a onClick={cb} value="<"
+            href={`${localStorage.getItem('pathname')}#category-anchor`}
+            className={styles}>{decodeURIComponent(label)}</a>)
+        }
+        return (<a onClick={cb} value="<" key={index}
+            href={`${localStorage.getItem('pathname')}#category-anchor`}
+            className={styles}>{decodeURIComponent(label)}</a>)
+    }
+
     useEffect(() => {
         const array = Array.from(Array(maxShowNumbers), (_, index) => index - Math.floor(maxShowNumbers / 2))
-            .map(item => parseInt(item) + parseInt(currentPage));
+            .map(item => parseInt(item) + currentPage);
         setShowArray(array);
         currentPageRef.current = currentPage
     }, [maxShowNumbers, currentPage]);
 
     return (
         <div className={styles['page-wrapper']}>
-            <button onClick={() => prevPage()} value="<"
-                className={parseInt(currentPage) === 1 ? styles.displayNone : ""}>&lt;</button>
-
-
-            {totalPages - currentPage < 2 && totalPages > 5 && (
+            {
+                anchorButton({
+                    cb: () => prevPage(),
+                    styles: currentPage === 1 ? styles.displayNone : "",
+                    label: encodeURIComponent('<')
+                })
+            }
+            {totalPages - currentPage < Math.floor(maxShowNumbers / 2) && totalPages > maxShowNumbers && (
                 <p>···</p>
             )}
             {showArray && showArray
@@ -37,15 +60,24 @@ const PageTemplate = ({
                         return;
                     if (item > totalPages)
                         return;
-                    // console.log(`🚀 ~ file: pageTemplate.jsx: item `, item);
-                    return <button key={index} value={item} onClick={() => setPage(item)}
-                        className={parseInt(currentPage) === parseInt(item) ? styles.active : ""}>{item}</button>;
+                    console.log(`🚀 ~ file pageTemplate.jsx: item `, item);
+                    return anchorButton({
+                        index: index,
+                        cb: () => setPage(item),
+                        styles: currentPage === parseInt(item) ? styles.active : "",
+                        label: encodeURIComponent(item)
+                    })
                 })}
-            {currentPage <= 2 && totalPages > 5 && (
+            {currentPage < Math.ceil(maxShowNumbers / 2) && totalPages > maxShowNumbers && (
                 <p>···</p>
             )}
-            <button onClick={() => nextPage()} value=">"
-                className={parseInt(currentPage) === totalPages ? styles.displayNone : ""}>&gt;</button>
+            {
+                anchorButton({
+                    cb: () => nextPage(),
+                    styles: currentPage === totalPages ? styles.displayNone : "",
+                    label: encodeURIComponent('>')
+                })
+            }
         </div>
     );
 }

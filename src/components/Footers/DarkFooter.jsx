@@ -4,22 +4,26 @@ import { useLocation } from "react-router-dom";
 // import Tag from "views/index-sections/Tag";
 
 import styles from "./darkFooter.module.css";
-import IndexDecorationImage from "../../views/index-sections/IndexDecorationImage";
+import IndexDecorationImage from "components/IndexDecorationImage/IndexDecorationImage";
 
 function DarkFooter() {
 
   const location = useLocation()
-  // console.log("🚀 ~ file: DarkFooter.jsx:12 ~ DarkFooter ~ location:", location)
+  console.log("🚀 ~ file DarkFooter.jsx:12 ~ DarkFooter ~ location:", location)
 
-  let footerClassName;
+  let footerClassName,
+    copyrightClassName;
   if (location.pathname === "/") {
     footerClassName = "index"
+    copyrightClassName = "index"
   }
   else if (location.pathname.startsWith('/c/') && location.pathname.indexOf('/p/') === -1) {
     footerClassName = "category"
+    copyrightClassName = "not-index"
   }
   else {
     footerClassName = "not-index"
+    copyrightClassName = "not-index"
   }
 
   return (
@@ -28,8 +32,8 @@ function DarkFooter() {
         <div className={styles['index-footer']}>
           <IndexDecorationImage
             imageType='thin-line'
-          // marginTop={72}
-          // marginBottom={103}
+            marginTop={'-5rem'}
+            marginBottom={'auto'}
           />
           <div className={`${styles['footer-header']} title`} style={{ color: `var(--theme-gold)` }}>
             About Zoonobet
@@ -60,13 +64,23 @@ function DarkFooter() {
             Zoobet is the largest and fastest-growing online casino game platform in India, offering various online games such as lottery, slot machines, sports, and poker, hoping to bring players the richest gaming experience. Zoobet creates a good game ecosystem, providing diverse activities, bonus rewards, and VIP gifts. Currently, it has over 500,000 members and is one of the most popular online casinos in India.
           </div>
         </div>
-        <IndexDecorationImage
-          imageType='thin-line'
-          marginTop={49}
-          marginBottom={15}
-        />
+
+        <div className={styles['footer-decoration-image-wrapper']}>
+          <IndexDecorationImage
+            imageType={'thin-line'}
+            marginTop={49}
+            marginBottom={15}
+          />
+          <IndexDecorationImage
+            position={`${footerClassName === 'index' ? 'relative' : 'absolute'}`}
+            imageType={`${footerClassName === 'index' ? 'thin-line' : 'line'}`}
+            marginTop={`${footerClassName === 'index' ? 49 : 'unset'}`}
+            marginBottom={`${footerClassName === 'index' ? 15 : '-3rem'}`}
+          />
+        </div>
+
       </footer>
-      <div className={styles.copyright}>
+      <div className={`${styles.copyright} ${styles[copyrightClassName]}`}>
         ©2023 Zoonobet All rights reserved
       </div>
     </>

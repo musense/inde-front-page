@@ -25,8 +25,8 @@
 .deco-background.repeat::before,
 .deco-background.repeat::after {
     width: 261px;
-    background-repeat: space;
     height: 100%;
+    background-repeat: space;
 }
 
 .deco-background.repeat::before {
@@ -43,8 +43,8 @@
 .deco-background.no-repeat::before,
 .deco-background.no-repeat::after {
     width: 367px;
-    background-repeat: no-repeat;
     height: 826px;
+    background-repeat: no-repeat;
 }
 
 .deco-background.no-repeat::before {
@@ -55,4 +55,30 @@
 .deco-background.no-repeat::after {
     background-image: url(assets/img/category/deco_toLeft.png);
     right: var(--category-background-offset);
+}
+
+@media screen and (max-width: 400px) {
+
+    .deco-background.fixed {
+        --category-background-offset: 1rem;
+        --category-background-transform: translateY(-10%);
+    }
+
+
+    .deco-background.no-repeat::before,
+    .deco-background.no-repeat::after {
+        width: 5rem;
+        height: 120rem;
+        background-repeat: no-repeat;
+    }
+
+    .deco-background.no-repeat::before {
+        background-image: url(assets/img/mobile/category/deco_toRight.png);
+        left: var(--category-background-offset)
+    }
+
+    .deco-background.no-repeat::after {
+        background-image: url(assets/img/mobile/category/deco_toLeft.png);
+        right: var(--category-background-offset);
+    }
 }

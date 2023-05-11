@@ -11,3 +11,15 @@
     text-decoration: none;
     color: var(--theme-red);
 }
+
+@media screen and (max-width: 400px) {
+    .trend-tags-flex-tags {
+        font-size: 1rem;
+        color: var(--theme-text);
+    }
+    
+    .trend-tags-flex-tags:hover {
+        text-decoration: none;
+        color: var(--theme-text);
+    }
+}

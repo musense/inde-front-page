@@ -9,7 +9,10 @@ const imageMap = new Map([
     ['casino', import('assets/img/category/banner.png')],
 ])
 
-const Banner = ({ category = 'casino' }) => {
+const Banner = React.forwardRef(function banner(
+    { category = 'casino' }
+    , ref
+) {
 
     const [image, setImage] = useState(null);
 
@@ -17,10 +20,11 @@ const Banner = ({ category = 'casino' }) => {
         imageMap.get(category).then(res => setImage(res.default))
     }, [category]);
 
-    console.log(`🚀 ~ file: tagPage.jsx:122 ~ banner ~ imageMap.get('${category}'):`, imageMap.get(category))
-    return image && (<div className={`section ${styles.section}`}>
+    console.log(`🚀 ~ file tagPage.jsx:122 ~ banner ~ imageMap.get('${category}'):`, imageMap.get(category))
+    return image && (<div ref={ref} className={`section ${styles.section}`}>
         <img src={image} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
     </div>)
-};
+}
+);
 
 export default Banner

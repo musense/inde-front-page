@@ -14,7 +14,7 @@ const timeOption = {
     minute: '2-digit',
 };
 export default function DateTimeStamp({date}) {
-    return date && (<div className='title-main-date'>
+    return date && (<div className={styles['title-main-date']}>
         <span className={styles['create-date']}>
             {new Date(date).toLocaleDateString(
                 undefined,

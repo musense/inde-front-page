@@ -9,9 +9,10 @@ const TitleContext = React.createContext()
 export { TitleContext }
 
 const initState = MainReducer()
-console.log("🚀 ~ file: Index.jsx:12 ~ initialState:", initState)
+console.log("🚀 ~ file Index.jsx:12 ~ initialState:", initState)
 
 function Index() {
+
 
   const reducer = useReducer(MainReducer, initState)
 
