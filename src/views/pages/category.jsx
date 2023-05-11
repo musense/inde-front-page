@@ -13,7 +13,7 @@ import DecoBackground from "components/DecoBackground/DecoBackground";
 import Banner from '../../components/Banner/Banner';
 
 
-import { TitleContext } from "views/Index";
+import { TitleContext } from 'views/Index';
 
 function Category() {
   // useScrollToTop();
@@ -21,7 +21,7 @@ function Category() {
 
   const bannerRef = useRef()
 
-  const [state, dispatch] = useContext(TitleContext);
+  const [state, dispatch] = useContext(TitleContext)
   console.log("🚀 ~ file category.jsx:21 ~ Category ~ state:", state)
 
   const [__ALL_CONTENT__, setAllContent] = useState(null);
@@ -36,6 +36,17 @@ function Category() {
 
   useEffect(() => {
 
+    if (!state.clientWidth) {
+      dispatch({
+        type: 'SET_WINDOW_SIZE',
+        payload: {
+          width: window.innerWidth || document.documentElement.clientWidth ||
+            document.body.clientWidth,
+          height: window.innerHeight || document.documentElement.clientHeight ||
+            document.body.clientHeigh
+        }
+      })
+    }
     window.scrollTo(0, 1);
 
     console.log("🚀 ~ file category.jsx:95 ~ Category ~ categoryName:", categoryName)
@@ -54,7 +65,7 @@ function Category() {
     }
     getTitleContentsByCategoryAsync()
 
-  }, [categoryName, state.clientWidth]);
+  }, [categoryName, dispatch, state.clientWidth]);
 
   useMemo(() => {
     if (__ALL_CONTENT__) {

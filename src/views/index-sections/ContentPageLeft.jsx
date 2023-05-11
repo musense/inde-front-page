@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Tag from "components/Tag/Tag";
 import { Link } from "react-router-dom";
 import GoToContentPage from "components/page/goToContentPage";
@@ -6,6 +6,8 @@ import styles from './contentPageLeft.module.css'
 import DecoBackground from "components/DecoBackground/DecoBackground";
 import IndexDecorationImage from "components/IndexDecorationImage/IndexDecorationImage";
 // import DateTimeStamp from "components/Date/DateTimeStamp";
+
+import { TitleContext } from "views/Index"
 
 const item = {
   src: '/img/content/image.png',
@@ -18,11 +20,18 @@ function ContentPageLeft({
   nextInfo,
   category }) {
 
+  const [state, dispatch] = useContext(TitleContext)
   return content && (
     <div className={styles['content-page']}>
 
       <div className={styles['left-content']}>
-        <DecoBackground type={'content'} />
+        {
+          state.clientWidth > 400
+            ? (<DecoBackground type={'content'} />)
+            : (<DecoBackground type={'category'} />)
+        }
+
+
         <div className={styles['title-view']}>
           <Link className={styles['main-title-decoration']} to={`/c/${content.categories.name}`}>Return</Link>
           <div className={styles['contentPageLeft-decoration-image-wrapper']}>
