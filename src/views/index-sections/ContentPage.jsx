@@ -55,7 +55,17 @@ function ContentPage() {
 
 
   useEffect(() => {
-
+    if (!state.clientWidth) {
+      dispatch({
+        type: 'SET_WINDOW_SIZE',
+        payload: {
+          width: window.innerWidth || document.documentElement.clientWidth ||
+            document.body.clientWidth,
+          height: window.innerHeight || document.documentElement.clientHeight ||
+            document.body.clientHeigh
+        }
+      })
+    }
     async function getTitleContentsByIDAsync() {
       const payload = {
         _id: id,
@@ -83,7 +93,7 @@ function ContentPage() {
     }
     getTitleContentsByIDAsync()
 
-  }, [id]);
+  }, [dispatch, id, state.clientWidth, state.contents]);
 
 
 
