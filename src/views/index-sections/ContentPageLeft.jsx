@@ -60,7 +60,7 @@ function ContentPageLeft({
               nextInfo={nextInfo}
             />}
           </div>
-{/* 
+          {/* 
           <div className={styles['contentPageLeft-decoration-image-wrapper']}>
             <IndexDecorationImage
               marginTop={66}
@@ -74,7 +74,9 @@ function ContentPageLeft({
           </div> */}
 
           <div className={styles['content-side']}>
-            <div className={styles['content-advertise']}></div>
+            <a href={'https://zoobet168.com/'} target="_blank" rel="noopener noreferrer" >
+              <div className={styles['content-advertise']} />
+            </a>
             <div className={styles['content-tags']}>
               <div>Tag</div>
               <div>
