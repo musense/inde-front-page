@@ -108,6 +108,12 @@
     font-size: 20px;
 }
 
+.title-main-content h1,
+.title-main-content h2,
+.title-main-content h3 {
+    font-family: NotoSans-Medium;
+}
+
 .title-main-content img {
     max-width: 100%;
 }
