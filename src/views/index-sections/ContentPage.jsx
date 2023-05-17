@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer, useContext } from 'react';
+import React, { useEffect, useState, useReducer, useContext, useRef } from 'react';
 
 
 import { useParams } from 'react-router-dom';
@@ -14,14 +14,23 @@ import InterestedContents from './InterestedContents';
 
 import { TitleContext } from "views/Index";
 
-const item = {
+
+const mobileItem = {
   src: '/img/mobile/index/banner.png',
   altText: 'The most popular games in India',
   title: 'The most popular games in India',
 };
+const pcItem = {
+  src: '/img/index/banner.png',
+  altText: 'The most popular games in India',
+  title: 'The most popular games in India',
+};
+
+
 function ContentPage() {
   useScrollToTop(664);
 
+  const [item, setItem] = useState();
   const [state, dispatch] = useContext(TitleContext);
   console.log("🚀 ~ file ContentPage.jsx:26 ~ ContentPage ~ state:", state)
 
@@ -53,7 +62,6 @@ function ContentPage() {
     setNextInfo(nextInfo)
   };
 
-
   useEffect(() => {
     if (!state.clientWidth) {
       dispatch({
@@ -65,7 +73,17 @@ function ContentPage() {
             document.body.clientHeigh
         }
       })
+    } else {
+        console.log("🚀 ~ file: ContentPage.jsx:71 ~ useEffect ~ state.clientWidth:", state.clientWidth)
+
+        if (state.clientWidth < 400) {
+
+          setItem({ ...mobileItem })
+        } else {
+          setItem({ ...pcItem })
+        }
     }
+
     async function getTitleContentsByIDAsync() {
       const payload = {
         _id: id,
@@ -99,9 +117,9 @@ function ContentPage() {
 
   return (
     <>
-      <div className={`section ${styles.section}`}>
+      {item && (<div className={`section ${styles.section}`}>
         <img src={item.src} alt={item.altText} title={item.title} width={'100%'} />
-      </div>
+      </div>)}
 
 
       <ContentPageLeft
