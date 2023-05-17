@@ -62,6 +62,10 @@
   align-items: flex-start;
 }
 
+.connect-container:hover {
+  text-decoration: none;
+}
+
 .connect-container::after {
   content: "";
   position: absolute;

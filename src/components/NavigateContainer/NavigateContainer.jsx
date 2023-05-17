@@ -1,6 +1,6 @@
 import React from "react";
 import mainStyles from './navigateContainer.module.css'
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function NavigateContainer({
     category,
@@ -9,22 +9,20 @@ function NavigateContainer({
     index,
     styles,
     customClassName = "title-container" }) {
-    const navigate = useNavigate()
-    function goToContent(contentID) {
-        if (contentID === null) return
-        navigate(`/c/${category}/p/${contentID}`)
-    }
 
     if (styles === null || styles === '' || styles === undefined) {
         styles = mainStyles
     }
     
-    return (<div
+    return (<Link
+        target="_blank" 
+        rel="noopener noreferrer"
+        to={`/c/${category}/p/${contentID}`}
         className={styles[customClassName]}
-        onClick={() => goToContent(contentID)}
+        // onClick={() => goToContent(contentID)}
     >
         {children}
-    </div>);
+    </Link>);
 }
 
 export default NavigateContainer;
