@@ -114,6 +114,13 @@
     font-family: NotoSans-Medium;
 }
 
+.title-main-content b,
+.title-main-content strong{
+    font-family: NotoSans-Medium;
+    text-shadow: 0 0 black;
+    -webkit-text-stroke-width: thin;
+}
+
 .title-main-content img {
     max-width: 100%;
 }
