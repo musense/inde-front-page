@@ -55,8 +55,8 @@
 .title {
   user-select: none;
   font-family: Lobster-Regular;
-  font-size: 90.5px;
-  letter-spacing: 9.05px;
+  font-size: 60px;
+  letter-spacing: 1px;
 }
 
 a {
@@ -120,9 +120,14 @@ button:focus-visible {
   }
 }
 
-@font-face {
+/* @font-face {
   font-family: Lobster-Regular;
   src: url('/fonts/Lobster-Regular.ttf');
+} */
+
+@font-face {
+  font-family: Lobster-Regular;
+  src: url('/fonts/SwanseaBold-D0ox.ttf');
 }
 
 @font-face {

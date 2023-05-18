@@ -40,7 +40,7 @@ function ContentPageLeft({
               marginBottom={'2rem'}
               imageType={'line'} />
           </div>
-          <h1 className={styles['main-title']}>{content.title}</h1>
+          <h1 className={`${styles['main-title']} title`}>{content.title}</h1>
         </div>
         <div className={styles['main-content']}>
           {/* <img
