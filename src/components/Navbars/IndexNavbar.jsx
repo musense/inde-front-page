@@ -15,19 +15,63 @@ function IndexNavbar() {
   const hamburgerRef = useRef(null);
   const [active, setActive] = useState(false);
 
+  const stopPropagationAndToggleHamburger = (e) => {
+    e.stopPropagation()
+    toggleHamburger(e)
+  }
+  const preventClick = (e) => {
+    e.stopPropagation();
+  }
+  const preventScroll = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  }
   useEffect(() => {
+    document.body.addEventListener("click", unCheck)
+    document.body.addEventListener("touchstart", unCheck)
+    document.body.addEventListener("scroll", unCheck)
     if (hamburgerRef.current == null) {
-      hamburgerRef.current = "hamburger-check"
+      return
+    } else {
+      hamburgerRef.current.addEventListener('click', stopPropagationAndToggleHamburger, false)
+      hamburgerRef.current.addEventListener('touchstart', stopPropagationAndToggleHamburger, false)
     }
-    console.log("🚀 ~ file headerLayout.jsx:25 ~ HeaderLayout ~ active:", active)
-  }, [hamburgerRef]);
-  function toggleHamburger(e) {
+    if (navRef.current === null) {
+      return
+    } else {
+      navRef.current.addEventListener('click', preventClick, false)
+      navRef.current.addEventListener('touchstart', preventClick, false)
+      navRef.current.addEventListener('touchmove', preventScroll, false)
+      navRef.current.addEventListener('wheel', preventScroll, false)
+      navRef.current.addEventListener('scroll', preventScroll, false)
+    }
+    const myBody = document.body;
+    const myHamburgerRef = hamburgerRef.current;
+    const myNavRef = navRef.current;
+    return () => {
+      myBody.removeEventListener("click", unCheck)
+      myBody.removeEventListener("touchstart", unCheck)
+      myBody.removeEventListener("scroll", unCheck)
+
+      myHamburgerRef.removeEventListener('click', stopPropagationAndToggleHamburger)
+      myHamburgerRef.removeEventListener('touchstart', stopPropagationAndToggleHamburger)
+
+      myNavRef.removeEventListener('click', preventClick)
+      myNavRef.removeEventListener('touchstart', preventClick)
+      myNavRef.removeEventListener('touchmove', preventScroll)
+      myNavRef.removeEventListener('wheel', preventScroll)
+      myNavRef.removeEventListener('scroll', preventScroll)
+    }
+  }, [hamburgerRef, navRef]);
+
+  const toggleHamburger = (e) => {
     console.log("Clicked, new value = " + e.target.checked);
     setActive(e.target.checked)
   }
 
   function unCheck() {
-    const hamburgerCheck = document.querySelector(`#${hamburgerRef.current}`);
+    console.log("🚀 ~ file: IndexNavbar.jsx:68 ~ unCheck ~ unCheck:", 'unCheck!!!!!!')
+    const hamburgerCheck = hamburgerRef.current;
     setActive(false)
     hamburgerCheck.checked = false;
   }
@@ -39,20 +83,22 @@ function IndexNavbar() {
         <Container className={styles.container}>
           <Logo />
           <Nav className={`${styles['nav-btn-wrapper']} ${active ? styles['active'] : ''}`}>
-            {indexButtonList.map((item, index) => {
-              return <NavButton
-                closeMenu={unCheck}
-                key={index}
-                category={item} />
-            })}
+            <div ref={navRef}>
+              {indexButtonList.map((item, index) => {
+                return <NavButton
+                  closeMenu={unCheck}
+                  key={index}
+                  category={item} />
+              })}
+            </div>
           </Nav>
           <Hamburger
-            id={hamburgerRef.current}
-            toggleHamburger={toggleHamburger}
+            ref={hamburgerRef}
+            // toggleHamburger={toggleHamburger}
             unCheck={unCheck}
           />
         </Container>
-      </Navbar>
+      </Navbar >
     </>
   );
 
