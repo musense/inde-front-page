@@ -11,6 +11,15 @@
   height: var(--navbar-height);
   z-index: 9999;
   position: fixed !important;
+  transition: top 0.2s ease-in;
+}
+
+.navbar.hide {
+  --navbar-height: -153px;
+  top: calc(var(--navbar-height) - 5px - 3px);
+}
+.navbar.show {
+  top: 0;
 }
 
 .navbar ul {

@@ -6,10 +6,12 @@ import styles from './indexNavbar.module.css'
 import Logo from "./Logo";
 import NavButton from "./NavButton";
 import Hamburger from "components/Hamburger/Hamburger";
+import useShowHeader from "hook/useShowHeader"
 
 
 function IndexNavbar() {
 
+  const [showHeader, headerForceHide] = useShowHeader();
   const hamburgerRef = useRef(null);
   const [active, setActive] = useState(false);
 
@@ -33,7 +35,7 @@ function IndexNavbar() {
   const indexButtonList = ['home', 'lottery', 'sports', 'poker', 'matka', 'casino']
   return (
     <>
-      <Navbar id="navbar" className={`fixed-top ${styles.navbar}`}>
+      <Navbar id="navbar" className={`fixed-top ${styles.navbar} ${showHeader ? styles.show : styles.hide}`}>
         <Container className={styles.container}>
           <Logo />
           <Nav className={`${styles['nav-btn-wrapper']} ${active ? styles['active'] : ''}`}>
