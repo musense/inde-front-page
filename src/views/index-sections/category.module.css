@@ -60,7 +60,7 @@
   justify-content: flex-start;
   column-gap: 136px;
   row-gap: 198px;
-  z-index: 1;
+  z-index: 0;
 }
 
 .main-content>div:last-child {
