@@ -2,16 +2,18 @@
     --category-background-transform: translateY(-50%);
     inset: 0;
     z-index: -1;
+    top: 10%;
+    bottom: 10%;
 }
 
 .deco-background.fixed {
     position: fixed;
-    --category-background-offset: 19px;
+    /* --category-background-offset: 19px; */
 }
 
 .deco-background.absolute {
     position: absolute;
-    --category-background-offset: -362px;
+    /* --category-background-offset: -240px; */
 }
 
 .deco-background::before,
@@ -25,9 +27,10 @@
 
 .deco-background.repeat::before,
 .deco-background.repeat::after {
-    width: 261px;
+    width: 178px;
     height: 100%;
     background-repeat: space;
+    background-position: center;
 }
 
 .deco-background.repeat::before {

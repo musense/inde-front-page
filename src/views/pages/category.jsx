@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -97,9 +97,30 @@ function Category() {
     // navigate(`${localStorage.getItem('pathname')}#categoryName`)
   }
 
+  const Page = useCallback(() => {
+    if (state.clientWidth < 400) {
+      return <PageTemplate
+        prevPage={goPreviousPage}
+        nextPage={goNextPage}
+        setPage={setPage}
+        currentPage={currPage}
+        totalPages={totalPages}
+        maxShowNumbers={3}
+      />
+    } else {
+      return <PageTemplate
+        prevPage={goPreviousPage}
+        nextPage={goNextPage}
+        setPage={setPage}
+        currentPage={currPage}
+        totalPages={totalPages}
+        maxShowNumbers={5}
+      />
+    }
+  }, [currPage, state.clientWidth, totalPages])
   return (
     <>
-      <DecoBackground type={'category'} />
+
       <Banner ref={bannerRef} category={categoryName} />
       <div id="categoryName" className={`${styles['category-name']} title`}>
         {categoryName}
@@ -118,31 +139,17 @@ function Category() {
       </div>
 
       {viewContents && (<div className={`${styles['main-content']}`}>
+        <Background />
+
         {viewContents.map((content, index) =>
           <ConnectContent key={index} index={index} content={content} category={categoryName} />
         )}
+
+        <Page />
       </div>
       )}
 
-      {state.clientWidth < 400 ? (
-        <PageTemplate
-          prevPage={goPreviousPage}
-          nextPage={goNextPage}
-          setPage={setPage}
-          currentPage={currPage}
-          totalPages={totalPages}
-          maxShowNumbers={3}
-        />
-      ) : (
-        <PageTemplate
-          prevPage={goPreviousPage}
-          nextPage={goNextPage}
-          setPage={setPage}
-          currentPage={currPage}
-          totalPages={totalPages}
-          maxShowNumbers={5}
-        />
-      )}
+
 
 
       <div className={styles['category-decoration-image-wrapper']}>

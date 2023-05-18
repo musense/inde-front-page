@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useParams } from 'react-router-dom';
 // core components
@@ -16,8 +16,10 @@ import PageTemplate from "components/page/pageTemplate";
 import DecoBackground from "components/DecoBackground/DecoBackground";
 import Banner from 'components/Banner/Banner';
 
+import { TitleContext } from 'views/Index';
 function TagPage() {
   useScrollToTop();
+  const [state, dispatch] = useContext(TitleContext)
 
   const { tag } = useParams();
   const [__ALL_CONTENT__, setAllContent] = useState(null);
@@ -42,7 +44,48 @@ function TagPage() {
   //   setPrevID(prevID)
   //   setNextID(nextID)
   // };
+  useEffect(() => {
+    if (!state.clientWidth) {
+      dispatch({
+        type: 'SET_WINDOW_SIZE',
+        payload: {
+          width: window.innerWidth || document.documentElement.clientWidth ||
+            document.body.clientWidth,
+          height: window.innerHeight || document.documentElement.clientHeight ||
+            document.body.clientHeigh
+        }
+      })
+    }
+  }, [state.clientWidth, dispatch]);
+  const Background = useCallback(() => {
+    if (state.clientWidth < 400) {
+      return <DecoBackground repeat={'no-repeat'} position={'fixed'} />
+    } else {
+      return (<DecoBackground repeat={'repeat'} position={'absolute'} />)
+    }
+  }, [state.clientWidth])
 
+  const Page = useCallback(() => {
+    if (state.clientWidth < 400) {
+      return <PageTemplate
+        prevPage={goPreviousPage}
+        nextPage={goNextPage}
+        setPage={setPage}
+        currentPage={currPage}
+        totalPages={totalPages}
+        maxShowNumbers={3}
+      />
+    } else {
+      return <PageTemplate
+        prevPage={goPreviousPage}
+        nextPage={goNextPage}
+        setPage={setPage}
+        currentPage={currPage}
+        totalPages={totalPages}
+        maxShowNumbers={5}
+      />
+    }
+  }, [currPage, state.clientWidth, totalPages])
 
   useEffect(() => {
     const payload = {
@@ -102,7 +145,7 @@ function TagPage() {
 
   return (
     <>
-      <DecoBackground type={'category'} />
+
       <Banner />
       <div className={`${styles['category-name']} title`}>
         #&nbsp;{tag}
@@ -121,20 +164,17 @@ function TagPage() {
       </div>
 
       {viewContents && (<div className={`${styles['main-content']}`}>
+        <Background />
+
         {viewContents.map((content, index) =>
           <ConnectContent key={index} index={index} content={content} category={tag} />
         )}
+
+        <Page />
       </div>
       )}
 
-      <PageTemplate
-        prevPage={goPreviousPage}
-        nextPage={goNextPage}
-        setPage={setPage}
-        currentPage={currPage}
-        totalPages={totalPages}
-        maxShowNumbers={5}
-      />
+
 
       <div className={styles['category-decoration-image-wrapper']}>
         <IndexDecorationImage

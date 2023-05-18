@@ -51,7 +51,8 @@
   /* background-color: lightgray; */
   background-color: unset;
   word-break: break-all;
-  margin: 0 auto 212px;
+  /* margin: 0 auto 212px; */
+  margin: 0 auto;
   font-family: NotoSans-Regular;
   display: flex;
   flex-direction: row;
@@ -60,6 +61,10 @@
   column-gap: 136px;
   row-gap: 198px;
   z-index: 1;
+}
+
+.main-content>div:last-child {
+  width: 100%;
 }
 
 .title-view {
