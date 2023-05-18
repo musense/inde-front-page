@@ -35,6 +35,8 @@ function ConnectContent({ index, content, item1 = null, category }) {
                     {content.title}
                 </div>
                 <DateTimeStamp date={content.createdAt} />
+
+                <div className={styles['connect-btn']} />
                 {/* <div
                     className={`${styles.content}`}
                     dangerouslySetInnerHTML={{ __html: content.content }}
