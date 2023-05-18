@@ -1,6 +1,7 @@
 .index-fixed-background {
     position: absolute;
     inset: 0;
+    z-index: -1;
 }
 
 .index-fixed-background::before,

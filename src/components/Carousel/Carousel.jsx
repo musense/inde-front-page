@@ -105,6 +105,7 @@ function CarouselSection() {
           key={item.src}
           className={styles.carouselItem}
         >
+          <a href={'https://zoobet168.com/'} className={styles.carouselAnchor} target="_blank" rel="noopener noreferrer" />
           <img src={item.src} alt={item.altText} className={styles.carouselImg} width={'100%'} />
           {/* <div className="carousel-caption d-none d-md-block">
             <h5>{item.caption}</h5>

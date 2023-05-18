@@ -45,6 +45,11 @@
   overflow: hidden;
 }
 
+.carouselAnchor {
+  position: absolute;
+  inset: 0;
+}
+
 .carouselImg {
   width: 100%;
   height: 100%;

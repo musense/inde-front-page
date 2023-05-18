@@ -117,9 +117,12 @@ function ContentPage() {
 
   return (
     <>
-      {item && (<div className={`section ${styles.section}`}>
-        <img src={item.src} alt={item.altText} title={item.title} width={'100%'} />
-      </div>)}
+      {item && (
+        <div className={`section ${styles.section}`}>
+          <a href={'https://zoobet168.com/'} target="_blank" rel="noopener noreferrer" />
+          <img src={item.src} alt={item.altText} title={item.title} width={'100%'} />
+        </div>)
+      }
 
 
       <ContentPageLeft
