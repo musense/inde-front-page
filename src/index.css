@@ -150,6 +150,11 @@ button:focus-visible {
 }
 
 @media screen and (max-width: 400px) {
+
+  :root {
+    --navbar-height: 6rem;
+  }
+
   .carousel-control-prev,
   .carousel-control-next,
   .carousel-indicators {

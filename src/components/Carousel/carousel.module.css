@@ -53,9 +53,10 @@
 }
 
 @media screen and (max-width: 400px) {
+
   .carousel {
     --carousel-image-height: 50vw;
-    margin-top: 8rem;
+    margin-top: var(--navbar-height);
   }
 
 }
