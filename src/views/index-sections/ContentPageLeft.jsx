@@ -48,8 +48,8 @@ function ContentPageLeft({
   return content && (
     <div className={styles['content-page']}>
 
+      <Background />
       <div className={styles['left-content']}>
-        <Background />
 
 
         <div className={styles['title-view']}>

@@ -177,8 +177,8 @@ function Category() {
           imageType={'line'} />
       </div>
 
+      <Background />
       {viewContents && (<div className={`${styles['main-content']}`}>
-        <Background />
 
         {viewContents.map((content, index) =>
           <ConnectContent key={index} index={index} content={content} category={categoryName} />
