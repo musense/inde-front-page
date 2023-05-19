@@ -7,21 +7,64 @@ import IndexDecorationImage from "components/IndexDecorationImage/IndexDecoratio
 import ConnectContent from 'components/ConnectContent/ConnectContent';
 
 import { getTitleContentsByCategory } from "assets/js/titleContents";
-import useScrollToTop from "hook/useScrollToTop";
+
 import PageTemplate from "components/page/pageTemplate";
 import DecoBackground from "components/DecoBackground/DecoBackground";
 import Banner from '../../components/Banner/Banner';
 
+import { animateScroll as scroll } from "react-scroll";
 
 import { TitleContext } from 'views/Index';
+import useShowHeader from 'hook/useShowHeader';
 
 function Category() {
-  // useScrollToTop();
+
+
+  const [state, dispatch] = useContext(TitleContext)
+
+  const [showHeader, headerForceHide] = useShowHeader();
+
+  const Background = useCallback(() => {
+    if (state.clientWidth < 400) {
+      return <DecoBackground
+        repeat={'repeat'}
+        position={'fixed'}
+        offset={'0.2rem'}
+      />
+    } else {
+      return (<DecoBackground
+        repeat={'repeat'}
+        position={'absolute'}
+      />)
+    }
+  }, [state.clientWidth])
+
+
+  const scrollToTop = useCallback(() => {
+    scroll.scrollTo(0, {
+      duration: 500,
+      delay: 0,
+      smooth: "easeInOutQuart",
+    });
+  }, [])
+
+  const scrollToPosition = useCallback(() => {
+    if (!state.clientWidth) return
+    let top = 402
+    if (state.clientWidth < 400)
+      top = 240
+    scroll.scrollTo(top, {
+      duration: 500,
+      delay: 0,
+      smooth: "easeInOutQuart",
+    });
+  }, [state.clientWidth])
+
+
   const navigate = useNavigate()
 
   const bannerRef = useRef()
 
-  const [state, dispatch] = useContext(TitleContext)
   console.log("🚀 ~ file category.jsx:21 ~ Category ~ state:", state)
 
   const [__ALL_CONTENT__, setAllContent] = useState(null);
@@ -34,8 +77,10 @@ function Category() {
 
   const { categoryName } = useParams();
 
-  useEffect(() => {
 
+
+  useEffect(() => {
+    scrollToTop()
     if (!state.clientWidth) {
       dispatch({
         type: 'SET_WINDOW_SIZE',
@@ -47,7 +92,7 @@ function Category() {
         }
       })
     }
-    window.scrollTo(0, 1);
+
 
     console.log("🚀 ~ file category.jsx:95 ~ Category ~ categoryName:", categoryName)
     async function getTitleContentsByCategoryAsync() {
@@ -65,7 +110,7 @@ function Category() {
     }
     getTitleContentsByCategoryAsync()
 
-  }, [categoryName, dispatch, state.clientWidth]);
+  }, [categoryName, dispatch, scrollToTop, state.clientWidth]);
 
   useMemo(() => {
     if (__ALL_CONTENT__) {
@@ -76,26 +121,20 @@ function Category() {
   }, [__ALL_CONTENT__, currPage])
 
 
-  const goPreviousPage = () => {
-    // currentPageRef.current -= 1
-    // setCurrPage(currentPageRef.current)
+  const goPreviousPage = useCallback(() => {
     setCurrPage(page => parseInt(page) - 1)
-    // navigate(`${localStorage.getItem('pathname')}#categoryName`)
-  }
+    scrollToPosition()
+  }, [scrollToPosition])
 
-  const goNextPage = () => {
-    // currentPageRef.current += 1
-    // setCurrPage(currentPageRef.current)
+  const goNextPage = useCallback(() => {
     setCurrPage(page => parseInt(page) + 1)
-    // navigate(`${localStorage.getItem('pathname')}#categoryName`)
-  }
+    scrollToPosition()
+  }, [scrollToPosition])
 
-  const setPage = (page) => {
-    // currentPageRef.current = parseInt(page)
-    // setCurrPage(currentPageRef.current)
+  const setPage = useCallback((page) => {
     setCurrPage(parseInt(page))
-    // navigate(`${localStorage.getItem('pathname')}#categoryName`)
-  }
+    scrollToPosition()
+  }, [scrollToPosition])
 
   const Page = useCallback(() => {
     if (state.clientWidth < 400) {
@@ -117,7 +156,7 @@ function Category() {
         maxShowNumbers={5}
       />
     }
-  }, [currPage, state.clientWidth, totalPages])
+  }, [currPage, goNextPage, goPreviousPage, setPage, state.clientWidth, totalPages])
   return (
     <>
 

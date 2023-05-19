@@ -33,7 +33,7 @@ function DarkFooter() {
           <IndexDecorationImage
             imageType='thin-line'
             marginTop={'-5rem'}
-            marginBottom={'auto'}
+            marginBottom={'unset'}
           />
           <div className={`${styles['footer-header']} title`} style={{ color: `var(--theme-gold)` }}>
             About Zoonobet

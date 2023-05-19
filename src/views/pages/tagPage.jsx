@@ -11,14 +11,18 @@ import ConnectContent from 'components/ConnectContent/ConnectContent';
 // import ContentPageConnect from '../index-sections/ContentPageConnect';
 // import ContentPageRight from '../index-sections/ContentPageRight';
 import { getTagsContents } from "assets/js/tagContents";
-import useScrollToTop from "hook/useScrollToTop";
+
 import PageTemplate from "components/page/pageTemplate";
 import DecoBackground from "components/DecoBackground/DecoBackground";
 import Banner from 'components/Banner/Banner';
 
+import { animateScroll as scroll } from "react-scroll";
+
 import { TitleContext } from 'views/Index';
+
 function TagPage() {
-  useScrollToTop();
+
+
   const [state, dispatch] = useContext(TitleContext)
 
   const { tag } = useParams();
@@ -30,21 +34,21 @@ function TagPage() {
   const [totalPages, setTotalPages] = useState(1);
 
 
-  // const navigate = useNavigate();
-  // console.log("🚀 ~ file category.jsx:33 ~ Category ~ categoryName:", categoryName)
 
-  // const findOneByIdAndReturnPrevNextID = (arr = [], categoryName = null) => {
-  //   if (categoryName === null || typeof categoryName !== 'string') return null;
-  //   const theIndex = arr.findIndex((item) => item._id === categoryName);
-  //   const theContent = arr[theIndex];
-  //   const prevID = theIndex === 0 ? null : arr[theIndex - 1]._id;
-  //   const nextID = theIndex === arr.length - 1 ? null : arr[theIndex + 1]._id;
-  //   setTitleContents(arr);
-  //   setAllContent(theContent);
-  //   setPrevID(prevID)
-  //   setNextID(nextID)
-  // };
+  const scrollToPosition = useCallback(() => {
+    if (!state.clientWidth) return
+    let top = 401
+    if (state.clientWidth < 400)
+      top = 240
+    scroll.scrollTo(top, {
+      duration: 500,
+      delay: 0,
+      smooth: "easeInOutQuart",
+    });
+  }, [state.clientWidth])
+
   useEffect(() => {
+    scrollToPosition()
     if (!state.clientWidth) {
       dispatch({
         type: 'SET_WINDOW_SIZE',
@@ -56,12 +60,19 @@ function TagPage() {
         }
       })
     }
-  }, [state.clientWidth, dispatch]);
+  }, [state.clientWidth, dispatch, scrollToPosition]);
   const Background = useCallback(() => {
     if (state.clientWidth < 400) {
-      return <DecoBackground repeat={'no-repeat'} position={'fixed'} />
+      return <DecoBackground
+        repeat={'repeat'}
+        position={'fixed'}
+        offset={'0.2rem'}
+      />
     } else {
-      return (<DecoBackground repeat={'repeat'} position={'absolute'} />)
+      return (<DecoBackground
+        repeat={'repeat'}
+        position={'absolute'}
+      />)
     }
   }, [state.clientWidth])
 
@@ -150,6 +161,7 @@ function TagPage() {
       <div className={`${styles['category-name']} title`}>
         #&nbsp;{tag}
       </div>
+      <div id="category-anchor" />
 
       <div className={styles['category-decoration-image-wrapper']}>
         <IndexDecorationImage

@@ -14,11 +14,12 @@ export default defineConfig({
       'views': resolve(rootDir, 'src/views/'),
       'store': resolve(rootDir, 'src/store/'),
       'hook': resolve(rootDir, 'src/hook/'),
+      'services': resolve(rootDir, 'src/services/'),
     }
   },
   server: {
     host: '0.0.0.0',
-    port: 3000,
+    port: 4200,
     open: true,
   },
   preview: {

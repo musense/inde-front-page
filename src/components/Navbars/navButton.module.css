@@ -23,7 +23,6 @@
     .navButton.active,
     .navButton:hover {
         text-decoration: none;
-        color: var(--theme-color);
     }
 
     .navButton.active {

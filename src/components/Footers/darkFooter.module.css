@@ -10,12 +10,13 @@
   align-items: center;
   background-image: url(assets/img/footer/background.png);
   margin-top: 60px;
+  padding: 60px 0;
   z-index: 0;
 }
 
 .index-footer .footer-article {
   max-width: 1000px;
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
 }
 
 .custom-footer {
@@ -109,6 +110,7 @@
   letter-spacing: 6px;
   background-color: white;
   height: 111px;
+  z-index: 1;
 }
 
 

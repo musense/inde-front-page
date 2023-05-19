@@ -6,7 +6,7 @@ export default function GoToBtn({ category, title, id, type }) {
     const navigate = useNavigate()
     function goToContent(contentID) {
         if (contentID === null) return
-        navigate(`/c/${category}/p/${contentID}`)
+        navigate(`/c/${category}/p/${contentID}#contentPage-return-button`)
     }
     return (id && title) && (
         // <div >

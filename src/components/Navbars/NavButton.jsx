@@ -20,11 +20,14 @@ export default function NavButton({ category, closeMenu }) {
     return (
         <NavItem>
             <NavLink
-                onClick={closeMenu}
+                // onClick={closeMenu}
                 to={`${category === 'home' ? '' : `/c/${category}`}`}
-                className={`${styles['navButton']} ${selectedCategory(pathname) === category
+                className={`${styles['navButton']} 
+                ${selectedCategory(pathname) === category
                         ? styles['active']
-                        : ''}`}
+                        : ''
+                    }`
+                }
             >
                 {CategoryShowName}
             </NavLink>

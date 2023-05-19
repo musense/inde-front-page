@@ -1,9 +1,5 @@
-import React, { useMemo, useState, useEffect, useRef, useContext } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styles from './pageTemplate.module.css'
-import useScrollToTop from 'hook/useScrollToTop';
-
-import { TitleContext } from 'views/Index';
-import { Link } from 'react-router-dom';
 
 const PageTemplate = ({
     prevPage,
@@ -11,10 +7,9 @@ const PageTemplate = ({
     setPage,
     currentPage: currentPageProp,
     totalPages,
-    maxShowNumbers = 5,
+    maxShowNumbers = 5
 }) => {
 
-    const [state, dispatch] = useContext(TitleContext);
 
     const [showArray, setShowArray] = useState(null);
     const currentPageRef = useRef(null)
@@ -27,8 +22,8 @@ const PageTemplate = ({
     const anchorButton = ({ cb, styles, label, index = null }) => {
         if (index === null) {
             return (<a onClick={cb} value="<"
-            href={`${localStorage.getItem('pathname')}#category-anchor`}
-            className={styles}>{decodeURIComponent(label)}</a>)
+                href={`${localStorage.getItem('pathname')}#category-anchor`}
+                className={styles}>{decodeURIComponent(label)}</a>)
         }
         return (<a onClick={cb} value="<" key={index}
             href={`${localStorage.getItem('pathname')}#category-anchor`}
@@ -46,7 +41,7 @@ const PageTemplate = ({
         <div className={styles['page-wrapper']}>
             {
                 anchorButton({
-                    cb: () => prevPage(),
+                    cb: () => { prevPage() },
                     styles: currentPage === 1 ? styles.displayNone : "",
                     label: encodeURIComponent('<')
                 })

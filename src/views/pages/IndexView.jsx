@@ -1,10 +1,10 @@
-import useScrollToTop from "hook/useScrollToTop";
 import React, { useContext, useEffect } from "react";
 import Carousel from "components/Carousel/Carousel";
 
 import IndexViewBlock from "components/IndexViewBlock/IndexViewBlock";
 import styles from "./indexView.module.css";
 import IndexDecorationImage from "components/IndexDecorationImage/IndexDecorationImage";
+import { animateScroll as scroll } from "react-scroll";
 
 import { TitleContext } from "views/Index";
 
@@ -27,22 +27,39 @@ const item3 = {
 
 function IndexView() {
     const [state, dispatch] = useContext(TitleContext);
-    window.addEventListener("load", function () {
-        setTimeout(function () {
-            window.scrollTo(0, 1);
-        }, 0);
-    });
+
+    const scrollToTop = (clientWidth) => {
+        if (!clientWidth) return
+
+        let top = 0
+        
+        console.log("🚀 ~ file: IndexNavbar.jsx:22 ~ scrollToTop ~ top:", top)
+
+        scroll.scrollTo(top, {
+            duration: 500,
+            delay: 0,
+            smooth: "easeInOutQuart",
+        });
+    }
+
+    scrollToTop(state.clientWidth)
+
+
     useEffect(() => {
-        dispatch({
-            type: 'SET_WINDOW_SIZE',
-            payload: {
-                width: window.innerWidth || document.documentElement.clientWidth ||
-                    document.body.clientWidth,
-                height: window.innerHeight || document.documentElement.clientHeight ||
-                    document.body.clientHeigh
-            }
-        })
-    }, []);
+        console.log("🚀 ~ file: IndexView.jsx:33 ~ useEffect ~ state:", state)
+        console.log("🚀 ~ file: IndexView.jsx:32 ~ useEffect ~ state.clientWidth:", state.clientWidth)
+        if (!state.clientWidth) {
+            dispatch({
+                type: 'SET_WINDOW_SIZE',
+                payload: {
+                    width: window.innerWidth || document.documentElement.clientWidth ||
+                        document.body.clientWidth,
+                    height: window.innerHeight || document.documentElement.clientHeight ||
+                        document.body.clientHeigh
+                }
+            })
+        }
+    }, [dispatch, state]);
 
     return (
         <>

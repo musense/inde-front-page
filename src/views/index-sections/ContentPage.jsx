@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer, useContext, useRef } from 'react';
+import React, { useEffect, useState, useReducer, useContext, useRef, useCallback } from 'react';
 
 
 import { useParams } from 'react-router-dom';
@@ -8,9 +8,11 @@ import IndexDecorationImage from "components/IndexDecorationImage/IndexDecoratio
 
 import ContentPageLeft from './ContentPageLeft';
 import { getTitleContentsByID, getRelatedArticles, getTitleContents } from "assets/js/titleContents";
-import useScrollToTop from "hook/useScrollToTop";
+
 
 import InterestedContents from './InterestedContents';
+
+import { animateScroll as scroll } from "react-scroll";
 
 import { TitleContext } from "views/Index";
 
@@ -28,11 +30,22 @@ const pcItem = {
 
 
 function ContentPage() {
-  useScrollToTop(664);
 
   const [item, setItem] = useState();
   const [state, dispatch] = useContext(TitleContext);
   console.log("🚀 ~ file ContentPage.jsx:26 ~ ContentPage ~ state:", state)
+
+  const scrollToPosition = useCallback(() => {
+    if (!state.clientWidth) return
+    let top = 660
+    if (state.clientWidth < 400)
+      top = 342
+    scroll.scrollTo(top, {
+      duration: 500,
+      delay: 0,
+      smooth: "easeInOutQuart",
+    });
+  }, [state.clientWidth])
 
   const [_theContent_, setTheContent] = useState(null);
   const [prevInfo, setPrevInfo] = useState(null);
@@ -63,6 +76,7 @@ function ContentPage() {
   };
 
   useEffect(() => {
+    scrollToPosition(660)
     if (!state.clientWidth) {
       dispatch({
         type: 'SET_WINDOW_SIZE',
@@ -74,14 +88,14 @@ function ContentPage() {
         }
       })
     } else {
-        console.log("🚀 ~ file: ContentPage.jsx:71 ~ useEffect ~ state.clientWidth:", state.clientWidth)
+      console.log("🚀 ~ file: ContentPage.jsx:71 ~ useEffect ~ state.clientWidth:", state.clientWidth)
 
-        if (state.clientWidth < 400) {
+      if (state.clientWidth < 400) {
 
-          setItem({ ...mobileItem })
-        } else {
-          setItem({ ...pcItem })
-        }
+        setItem({ ...mobileItem })
+      } else {
+        setItem({ ...pcItem })
+      }
     }
 
     async function getTitleContentsByIDAsync() {

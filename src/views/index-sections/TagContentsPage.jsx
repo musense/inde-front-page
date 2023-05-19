@@ -6,7 +6,7 @@ import { getTitleContentsByTag } from 'assets/js/titleContents';
 import styles from './tagContentPage.module.css';
 import ContentPageRight from './ContentPageRight';
 import ConnectContent from 'components/ConnectContent/ConnectContent';
-import useScrollToTop from 'hook/useScrollToTop';
+
 
 // const item0 = {
 //   src: require('assets/img/bg1.png'),
@@ -18,7 +18,7 @@ import useScrollToTop from 'hook/useScrollToTop';
 // };
 
 function TagContentsPage() {
-  useScrollToTop();
+
   const { tags } = useOutletContext();
 
   const [titleContents, setTitleContents] = useState(null);

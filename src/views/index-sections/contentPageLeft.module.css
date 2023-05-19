@@ -4,7 +4,7 @@
     margin: 117px auto 0;
     width: fit-content;
     display: block;
-    z-index: 0;
+    z-index: 1;
 }
 
 .left-content {
@@ -268,7 +268,7 @@
     .main-content {
         padding: unset;
         flex-direction: column;
-        align-items: center;
+        align-items: unset;
         gap: 2rem;
     }
 

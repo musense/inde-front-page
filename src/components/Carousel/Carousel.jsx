@@ -54,6 +54,7 @@ function CarouselSection() {
   const carouselRef = useRef(null)
   const [carouselItems, setCarouselItems] = useState(null);
   useEffect(() => {
+    console.log("🚀 ~ file: Carousel.jsx:70 ~ useEffect ~ state.clientWidth:", state.clientWidth)
     if (!state.clientWidth) return
 
     if (carouselRef.current === null) {

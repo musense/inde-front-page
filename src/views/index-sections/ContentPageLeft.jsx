@@ -7,6 +7,8 @@ import DecoBackground from "components/DecoBackground/DecoBackground";
 import IndexDecorationImage from "components/IndexDecorationImage/IndexDecorationImage";
 // import DateTimeStamp from "components/Date/DateTimeStamp";
 
+
+
 import { TitleContext } from "views/Index"
 
 const item = {
@@ -21,19 +23,37 @@ function ContentPageLeft({
   category }) {
 
   const [state, dispatch] = useContext(TitleContext)
+
+
+
+  const Background = useCallback(() => {
+    if (state.clientWidth < 400) {
+      return <DecoBackground
+        repeat={'repeat'}
+        position={'fixed'}
+        offset={'0.2rem'}
+      />
+    } else {
+      return (<DecoBackground
+        repeat={'repeat'}
+        position={'absolute'}
+        offset={'-375px'}
+
+      />)
+    }
+  }, [state.clientWidth])
+
+  console.log("🚀 ~ file: ContentPageLeft.jsx:36 ~ useEffect ~ state.clientWidth:", state.clientWidth)
+
   return content && (
     <div className={styles['content-page']}>
 
       <div className={styles['left-content']}>
-        {
-          state.clientWidth > 400
-            ? (<DecoBackground type={'content'} />)
-            : (<DecoBackground type={'category'} />)
-        }
+        <Background />
 
 
         <div className={styles['title-view']}>
-          <Link className={styles['main-title-decoration']} to={`/c/${content.categories.name}`}>Return</Link>
+          <Link id='contentPage-return-button' className={styles['main-title-decoration']} to={`/c/${content.categories.name}`}>Return</Link>
           <div className={styles['contentPageLeft-decoration-image-wrapper']}>
             <IndexDecorationImage
               marginTop={'2rem'}

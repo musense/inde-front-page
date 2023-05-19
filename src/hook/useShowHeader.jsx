@@ -12,21 +12,15 @@ export default function useShowHeader() {
     console.log("🚀 ~ file: useShowHeader.jsx:12 ~ useShowHeader ~ clientWindowWidth:", clientWindowWidth)
 
     const headerForceHide = () => {
+        console.log('!!!!!!!!!!!!headerForceHide scroll start!!!!!!!!!!!!');
         forceHideRef.current = true
         setShowHeader(false)
     }
     const headerRestore = () => {
-        // console.log('!!!!!!!!!!!!headerRestore scroll end!!!!!!!!!!!!');
+        console.log('!!!!!!!!!!!!headerRestore scroll end!!!!!!!!!!!!');
         forceHideRef.current = false
     }
-    const offset = useMemo(() => {
-        let offset = 153
-        if (!clientWindowWidth) return
-        if (clientWindowWidth < 400) {
-            offset = 96
-        }
-        return offset
-    }, [clientWindowWidth])
+ 
     const forceHideRef = useRef(false);
     const [showHeader, setShowHeader] = useState(true);
 
@@ -37,12 +31,15 @@ export default function useShowHeader() {
     useScrollPosition(({ prevPos, currPos }) => {
         // console.group("🚀 ~ file: useShowHeader.jsx:14 ~ useScrollPosition ~ useScrollPosition")
         // console.log("🚀 ~ file: useShowHeader.jsx:14 ~ useScrollPosition ~ currPos:", currPos.y)
-        // console.log("🚀 ~ file: useShowHeader.jsx:14 ~ useScrollPosition ~ prevPos:", prevPos.y)
+        console.log("🚀 ~ file: useShowHeader.jsx:14 ~ useScrollPosition ~ prevPos:", prevPos.y)
+        // console.log("🚀 ~ file: useShowHeader.jsx:48 ~ useScrollPosition ~ forceHideRef.current:", forceHideRef.current)
         // console.groupEnd("🚀 ~ file: useShowHeader.jsx:14 ~ useScrollPosition ~ useScrollPosition")
 
         if (forceHideRef.current) return
-        if (clientWindowWidth < 768 && -prevPos.y < offset) return
+        if (clientWindowWidth < 768 && -prevPos.y < 100) return
         const isShow = currPos.y > prevPos.y
+        // console.log("🚀 ~ file: useShowHeader.jsx:47 ~ useScrollPosition ~ isShow:", isShow)
+        // console.log("🚀 ~ file: useShowHeader.jsx:49 ~ useScrollPosition ~ showHeader:", showHeader)
         if (isShow !== showHeader) setShowHeader(isShow);
     },
         [showHeader],
