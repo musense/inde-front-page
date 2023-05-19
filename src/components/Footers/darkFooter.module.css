@@ -183,7 +183,7 @@
     width: 100vw;
     height: 44rem;
     background-image: url(/src/assets/img/mobile/index/background.png);
-    z-index: 1;
+    z-index: 2;
     margin-top: 2rem;
   }
 

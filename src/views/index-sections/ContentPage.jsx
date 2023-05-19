@@ -125,7 +125,7 @@ function ContentPage() {
     }
     getTitleContentsByIDAsync()
 
-  }, [dispatch, id, state.clientWidth, state.contents]);
+  }, [dispatch, id, scrollToPosition, state.clientWidth, state.contents]);
 
 
 
