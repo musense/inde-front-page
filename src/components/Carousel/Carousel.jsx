@@ -40,7 +40,7 @@ function CarouselSection() {
         setCarouselItems([desktopItem])
       }
     }
-  }, []);
+  }, [state.clientWidth]);
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [animating, setAnimating] = React.useState(false);
 
