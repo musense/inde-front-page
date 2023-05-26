@@ -68,8 +68,6 @@ function CarouselSection() {
     setActiveIndex(newIndex);
   };
 
-
-
   const slides = useMemo(() => {
     if (!carouselItems) return
     const mappedImages = [...carouselItems];
@@ -91,27 +89,35 @@ function CarouselSection() {
     });
   }, [carouselItems])
 
-  return carouselItems && (
-    <>
-      <Carousel
-        id={carouselRef}
-        activeIndex={activeIndex}
-        next={next}
-        previous={previous}
-        className={`${styles.carousel}`}
-      >
-        <CarouselIndicators
-          items={carouselItems} activeIndex={activeIndex} onClickHandler={goToIndex} className={styles.indicator} />
-        {slides}
-        {carouselItems && carouselItems.length > 1 && (
-          <>
-            <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
-            <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
-          </>
-        )}
-      </Carousel>
-    </>
-  );
-}
+  return carouselItems
+    ? carouselItems.length > 1
+      ? (
+        <Carousel
+          id={carouselRef}
+          activeIndex={activeIndex}
+          next={next}
+          previous={previous}
+          className={`${styles.carousel}`}
+        >
+          <CarouselIndicators
+            items={carouselItems} activeIndex={activeIndex} onClickHandler={goToIndex} className={styles.indicator} />
+          {slides}
+          <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
+          <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
+        </Carousel>
+      )
+      : (
+        <Carousel
+          id={carouselRef}
+          activeIndex={activeIndex}
+          next={next}
+          previous={previous}
+          className={`${styles.carousel}`}
+        >
+          {slides}
+        </Carousel>
+      )
+    : <></>
 
+}
 export default CarouselSection;
