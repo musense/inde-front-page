@@ -24,20 +24,39 @@ function Category() {
 
   const [showHeader, headerForceHide] = useShowHeader();
 
-  const Background = useCallback(() => {
+  const Background = useCallback(({showOn}) => {
+    if (!state.clientWidth) return
+    // mobile using
     if (state.clientWidth < 400) {
-      return <DecoBackground
-        repeat={'repeat'}
-        position={'fixed'}
-        offset={'0.2rem'}
-      />
+      switch (showOn) {
+        case "mobile": {
+          return (<DecoBackground
+            repeat={'repeat'}
+            position={'fixed'}
+            offset={'0.2rem'}
+          />)
+        }
+        case "desktop": {
+          return (<></>)
+        }
+      }
     } else {
-      return (<DecoBackground
-        repeat={'repeat'}
-        position={'absolute'}
-      />)
+      // desktop using
+      switch (showOn) {
+        case "mobile": {
+          return (<></>)
+        }
+        case "desktop": {
+          return (<DecoBackground
+            repeat={'repeat'}
+            position={'absolute'}
+          />)
+        }
+      }
     }
+
   }, [state.clientWidth])
+
 
 
   const scrollToTop = useCallback(() => {
@@ -77,7 +96,23 @@ function Category() {
 
   const { categoryName } = useParams();
 
+  async function getTitleContentsByCategoryAsync(categoryName) {
+    const payload = {
+      categoryName,
+      page: 1
+    };
+    const res = await getTitleContentsByCategory(payload)
+    const { data, currentPage, limit, totalCount, totalPages } = res;
+    console.log("🚀 ~ file category.jsx:67 ~ useEffect ~ res:", res);
 
+    setAllContent(data);
+    setCurrPage(1);
+    setTotalPages(Math.ceil(data.length / 6));
+  }
+
+  useEffect(() => {
+    getTitleContentsByCategoryAsync(categoryName)
+  }, [categoryName]);
 
   useEffect(() => {
     scrollToTop()
@@ -92,25 +127,7 @@ function Category() {
         }
       })
     }
-
-
-    console.log("🚀 ~ file category.jsx:95 ~ Category ~ categoryName:", categoryName)
-    async function getTitleContentsByCategoryAsync() {
-      const payload = {
-        categoryName,
-        page: 1
-      };
-      const res = await getTitleContentsByCategory(payload)
-      const { data, currentPage, limit, totalCount, totalPages } = res;
-      console.log("🚀 ~ file category.jsx:67 ~ useEffect ~ res:", res);
-
-      setAllContent(data);
-      setCurrPage(1);
-      setTotalPages(Math.ceil(data.length / 6));
-    }
-    getTitleContentsByCategoryAsync()
-
-  }, [categoryName, dispatch, scrollToTop, state.clientWidth]);
+  }, [dispatch, scrollToTop, state.clientWidth]);
 
   useMemo(() => {
     if (__ALL_CONTENT__) {
@@ -177,9 +194,9 @@ function Category() {
           imageType={'line'} />
       </div>
 
-      <Background />
+      <Background showOn={'mobile'} />
       {viewContents && (<div className={`${styles['main-content']}`}>
-
+        <Background showOn={'desktop'} />
         {viewContents.map((content, index) =>
           <ConnectContent key={index} index={index} content={content} category={categoryName} />
         )}

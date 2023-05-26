@@ -14,6 +14,7 @@ import { TitleContext } from "views/Index";
 
 function IndexNavbar() {
 
+
   const [state, dispatch] = useContext(TitleContext);
 
   const [showHeader, headerForceHide] = useShowHeader();
@@ -99,8 +100,8 @@ function IndexNavbar() {
                   closeMenu={unCheck}
                   key={index}
                   category={item}
-                  
-                  />
+
+                />
               })}
             </div>
           </Nav>

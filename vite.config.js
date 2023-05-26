@@ -5,7 +5,10 @@ import { resolve } from 'path';
 // eslint-disable-next-line no-undef
 const rootDir = resolve(__dirname)
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ command, mode }) => ({
+  esbuild: {
+    drop: mode === 'production' ? ['console', 'debugger'] : [],
+  },
   plugins: [react()],
   resolve: {
     alias: {
@@ -25,4 +28,4 @@ export default defineConfig({
   preview: {
     port: 3000,
   },
-})
+}))

@@ -19,23 +19,21 @@ export async function getTitleContents() {
 
 export async function getTitleContentsByCategory(payload) {
   const { categoryName, page } = payload
-  // const response = await instance.get(`/editor?limit=9999&categoryName=${category}&pageNumber=${page}`)
   const response = await instance.get(`/categories/${categoryName}?limit=9999&pageNumber=${page}`)
     .then(res => res.data)
-  // const { data, currentPage, limit, totalCount, totalPages } = response
+  const { data, currentPage, limit, totalCount, totalPages } = response
   console.log("🚀 ~ file titleContents.js:6 ~ getTitleContentsByCategory ~ response", response)
   return response
 }
 
 export async function getRelatedArticles(payload) {
   const { _id } = payload
-  // const response = await instance.get(`/editor?limit=9999&categoryName=${category}&pageNumber=${page}`)
   const response = await instance.get(`/editor/relatedArticles/${_id}`)
     .then(res => res.data)
   const { data } = response
   console.log("🚀 ~ file titleContents.js:27 ~ geRelatedArticles ~ data:", data)
   // return
-  return data 
+  return data
 }
 
 export async function getTitleContentsByTag(tag) {

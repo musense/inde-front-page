@@ -13,14 +13,10 @@ function NavigateContainer({
     if (styles === null || styles === '' || styles === undefined) {
         styles = mainStyles
     }
-    
+
     return (<Link
-        target="_blank" 
-        rel="noopener noreferrer"
         to={`/c/${category}/p/${contentID}`}
-        className={styles[customClassName]}
-        // onClick={() => goToContent(contentID)}
-    >
+        className={styles[customClassName]}>
         {children}
     </Link>);
 }

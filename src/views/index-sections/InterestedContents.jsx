@@ -39,7 +39,7 @@ export default function InterestedContents({ interestedContents }) {
     <div>
       {state.clientWidth > 400 && (<div>
         {interestedContents.findIndex(c => c._id === viewInterestedContents[0]._id) !== 0 &&
-          <button value="-1" onClick={e => onInterestedBtnClick(e)}>Previous</button>
+          <button className={styles['prev']} value="-1" onClick={e => onInterestedBtnClick(e)} />
         }
       </div>)}
       <div className={styles['connect-flex-box-wrapper']}>
@@ -49,7 +49,7 @@ export default function InterestedContents({ interestedContents }) {
       {state.clientWidth > 400 && (<div>
         {
           interestedContents.findIndex(c => c._id === viewInterestedContents[viewInterestedContents.length - 1]._id) !== interestedContents.length - 1 &&
-          <button value="1" onClick={e => onInterestedBtnClick(e)}>Next</button>
+          <button className={styles['next']} value="1" onClick={e => onInterestedBtnClick(e)} />
         }
       </div>)}
     </div>

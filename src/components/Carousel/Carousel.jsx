@@ -2,9 +2,6 @@ import React, { useMemo, useContext, useEffect, useState, useRef } from "react";
 import styles from './carousel.module.css'
 // reactstrap components
 import {
-  Container,
-  Row,
-  Col,
   Carousel,
   CarouselItem,
   CarouselIndicators,
@@ -18,38 +15,16 @@ const mobileItem = {
   altText: "The most popular games in India",
 }
 
+
 const desktopItem = {
   src: "/img/index/banner.png",
   altText: "The most popular games in India",
 }
-const items = [
 
-  {
-    src: "/img/index/background.png",
-    altText: "The most popular games in Taiwan",
-  },
-  {
-    src: "/img/index/image_1.png",
-    altText: "The most popular games in New York",
-  },
-  {
-    src: "/img/index/image_2.png",
-    altText: "The most popular games in Thailand",
-  },
-  {
-    src: "/img/index/image_3.png",
-    altText: "The most popular games in Japan",
-  },
-  {
-    src: "/img/index/image_4.png",
-    altText: "The most popular games in America",
-  },
-];
 
 
 function CarouselSection() {
   const [state, dispatch] = useContext(TitleContext);
-  console.log("🚀 ~ file: Carousel.jsx:52 ~ CarouselSection ~ state:", state)
 
   const carouselRef = useRef(null)
   const [carouselItems, setCarouselItems] = useState(null);
@@ -59,15 +34,13 @@ function CarouselSection() {
 
     if (carouselRef.current === null) {
       carouselRef.current = 'carousel'
-      if (state.clientWidth > 400) {
-        items.splice(0, 0, desktopItem)
+      if (state.clientWidth < 400) {
+        setCarouselItems([mobileItem])
       } else {
-        items.splice(0, 0, mobileItem)
-        console.log("🚀 ~ file: Carousel.jsx:52 ~ useEffect ~ items:", items)
+        setCarouselItems([desktopItem])
       }
-      setCarouselItems(items)
     }
-  }, [state.clientWidth]);
+  }, []);
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [animating, setAnimating] = React.useState(false);
 
@@ -80,12 +53,14 @@ function CarouselSection() {
 
   const next = () => {
     if (animating) return;
-    const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+    if (carouselItems.length === 1) return
+    const nextIndex = activeIndex === carouselItems.length - 1 ? 0 : activeIndex + 1;
     setActiveIndex(nextIndex);
   };
   const previous = () => {
     if (animating) return;
-    const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
+    if (carouselItems.length === 1) return
+    const nextIndex = activeIndex === 0 ? carouselItems.length - 1 : activeIndex - 1;
     setActiveIndex(nextIndex);
   };
   const goToIndex = (newIndex) => {
@@ -126,10 +101,14 @@ function CarouselSection() {
         className={`${styles.carousel}`}
       >
         <CarouselIndicators
-          items={items} activeIndex={activeIndex} onClickHandler={goToIndex} className={styles.indicator} />
+          items={carouselItems} activeIndex={activeIndex} onClickHandler={goToIndex} className={styles.indicator} />
         {slides}
-        <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
-        <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
+        {carouselItems && carouselItems.length > 1 && (
+          <>
+            <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
+            <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
+          </>
+        )}
       </Carousel>
     </>
   );

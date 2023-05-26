@@ -7,6 +7,7 @@
   align-items: center;
   gap: 50px;
   z-index: 1;
+  user-select: none;
 }
 
 .connect-flex-site>div:first-child {
@@ -46,8 +47,33 @@
   height: 50px;
 }
 
+.connect-flex-site button {
+  display: inline-block;
+  width: 55px;
+  height: 90px;
+  background: no-repeat 50%/100% 100%;
+  background-size: 60%;
+  border: unset;
+  opacity: 0.5;
+  transition: opacity 250ms ease;
+}
+
+
+.connect-flex-site button.prev {
+  background-image: url(/src/assets/img/index/prev.png);
+}
+
+.connect-flex-site button.next {
+  background-image: url(/src/assets/img/index/next.png);
+}
+
 .connect-flex-site button:hover {
   font-family: NotoSans-Medium;
+  opacity: 1;
+}
+.connect-flex-site button:focus {
+  outline: unset;
+  opacity: 1;
 }
 
 .connect-flex-box-wrapper {
@@ -95,13 +121,30 @@
     text-align: left;
   }
 
-  .connect-flex-site button {
+  /* .connect-flex-site button {
     background-color: var(--theme-white);
     border-color: var(--theme-text);
     color: var(--theme-text);
     font-family: NotoSans-Regular;
     width: 110px;
     height: 50px;
+  } */
+
+  .connect-flex-site button {
+    display: inline-block;
+    width: 55px;
+    height: 90px;
+    background: no-repeat 50%/100% 100%;
+    background-size: 60%;
+  }
+
+
+  .connect-flex-site button.prev {
+    background-image: url(/assets/img/index/prev.png);
+  }
+
+  .connect-flex-site button.next {
+    background-image: url(/assets/img/index/next.png);
   }
 
   .connect-flex-site button:hover {

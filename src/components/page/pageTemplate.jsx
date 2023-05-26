@@ -39,40 +39,42 @@ const PageTemplate = ({
 
     return (
         <div className={styles['page-wrapper']}>
-            {
-                anchorButton({
-                    cb: () => { prevPage() },
-                    styles: currentPage === 1 ? styles.displayNone : "",
-                    label: encodeURIComponent('<')
-                })
-            }
-            {totalPages - currentPage < Math.floor(maxShowNumbers / 2) && totalPages > maxShowNumbers && (
-                <p>···</p>
-            )}
-            {showArray && showArray
-                .map((item, index) => {
-                    if (item <= 0)
-                        return;
-                    if (item > totalPages)
-                        return;
-                    console.log(`🚀 ~ file pageTemplate.jsx: item `, item);
-                    return anchorButton({
-                        index: index,
-                        cb: () => setPage(item),
-                        styles: currentPage === parseInt(item) ? styles.active : "",
-                        label: encodeURIComponent(item)
+            <div>
+                {
+                    anchorButton({
+                        cb: () => { prevPage() },
+                        styles: currentPage === 1 ? styles.displayNone : "",
+                        label: encodeURIComponent('<')
                     })
-                })}
-            {currentPage < Math.ceil(maxShowNumbers / 2) && totalPages > maxShowNumbers && (
-                <p>···</p>
-            )}
-            {
-                anchorButton({
-                    cb: () => nextPage(),
-                    styles: currentPage === totalPages ? styles.displayNone : "",
-                    label: encodeURIComponent('>')
-                })
-            }
+                }
+                {totalPages - currentPage < Math.floor(maxShowNumbers / 2) && totalPages > maxShowNumbers && (
+                    <p>···</p>
+                )}
+                {showArray && showArray
+                    .map((item, index) => {
+                        if (item <= 0)
+                            return;
+                        if (item > totalPages)
+                            return;
+                        console.log(`🚀 ~ file pageTemplate.jsx: item `, item);
+                        return anchorButton({
+                            index: index,
+                            cb: () => setPage(item),
+                            styles: currentPage === parseInt(item) ? styles.active : "",
+                            label: encodeURIComponent(item)
+                        })
+                    })}
+                {currentPage < Math.ceil(maxShowNumbers / 2) && totalPages > maxShowNumbers && (
+                    <p>···</p>
+                )}
+                {
+                    anchorButton({
+                        cb: () => nextPage(),
+                        styles: currentPage === totalPages || totalPages === 0 ? styles.displayNone : "",
+                        label: encodeURIComponent('>')
+                    })
+                }
+            </div>
         </div>
     );
 }

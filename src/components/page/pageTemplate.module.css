@@ -1,15 +1,19 @@
 .page-wrapper {
     position: relative;
+    margin: 0 auto;
+}
+
+.page-wrapper>div {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     margin: 0 auto;
     justify-content: center;
     gap: 47px;
-    width: 700px;
+    max-width: 700px;
+    width: fit-content;
     user-select: none;
     font-family: NotoSans-Regular;
-    z-index: 1;
 }
 
 .page-wrapper a,
@@ -69,13 +73,12 @@ button.displayNone {
 
 @media (max-width: 400px) {
 
-    .page-wrapper {
+    .page-wrapper>div {
         width: 60vw;
         align-items: flex-end;
         /* background-color: grey; */
         gap: 0rem;
     }
-
 
     .page-wrapper a,
     .page-wrapper button {

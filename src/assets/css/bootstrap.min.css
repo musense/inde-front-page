@@ -6839,7 +6839,8 @@ a.close.disabled {
     color: #fff;
     text-align: center;
     opacity: .5;
-    transition: opacity .15s ease
+    transition: opacity .15s ease;
+    width: 10%;
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -6871,21 +6872,20 @@ a.close.disabled {
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
     display: inline-block;
-    width: 112px;
-    height: 26px;
-    /* width: 20px;
-    height: 20px; */
-    background: no-repeat 50%/100% 100%
+    width: 55px;
+    height: 90px;
+    background: no-repeat 50%/100% 100%;
+    background-size: 60%;
 }
 
 .carousel-control-prev-icon {
     /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e") */
-    background-image: url(/src/assets/img/content/prev.png);
+    background-image: url(/src/assets/img/index/prev.png);
 }
 
 .carousel-control-next-icon {
     /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e") */
-    background-image: url(/src/assets/img/content/next.png);
+    background-image: url(/src/assets/img/index/next.png);
 }
 
 .carousel-indicators {
@@ -6905,29 +6905,17 @@ a.close.disabled {
 }
 
 .carousel-indicators li {
+    --carousel-indicator-size: 13px;
+    --carousel-indicator-spacing: 1px;
     border-radius: 50%;
-    padding: 0.6em 0.6em;
-    background-color: lightgray;
-    border-color: black;
-    width: 3px;
-    height: 3px;
-    border: 1px solid black;
-
-    box-sizing: content-box;
-    -ms-flex: 0 1 auto;
-    flex: 0 1 auto;
-    /* width: 30px;
-    height: 3px; */
-    margin-right: 3px;
-    margin-left: 3px;
+    background-color: white;
+    width: var(--carousel-indicator-size);
+    height: var(--carousel-indicator-size);
+    margin-right: var(--carousel-indicator-spacing);
+    margin-left: var(--carousel-indicator-spacing);
     text-indent: -999px;
     cursor: pointer;
-    /* background-color: #fff; */
-    background-clip: padding-box;
-    /* border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent; */
-    opacity: .5;
-    transition: opacity .6s ease
+    transition: background-color .6s ease;
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -6937,7 +6925,8 @@ a.close.disabled {
 }
 
 .carousel-indicators .active {
-    opacity: 1
+    background-color: var(--theme-red);
+    border-color: var(--theme-red);
 }
 
 .carousel-caption {
