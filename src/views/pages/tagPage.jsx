@@ -61,19 +61,37 @@ function TagPage() {
       })
     }
   }, [state.clientWidth, dispatch, scrollToPosition]);
-  const Background = useCallback(() => {
+  const Background = useCallback(({ showOn }) => {
+    if (!state.clientWidth) return
+    // mobile using
     if (state.clientWidth < 400) {
-      return <DecoBackground
-        repeat={'repeat'}
-        position={'fixed'}
-        offset={'0.2rem'}
-      />
+      switch (showOn) {
+        case "mobile": {
+          return (<DecoBackground
+            repeat={'repeat'}
+            position={'fixed'}
+            offset={'0.2rem'}
+          />)
+        }
+        case "desktop": {
+          return (<></>)
+        }
+      }
     } else {
-      return (<DecoBackground
-        repeat={'repeat'}
-        position={'absolute'}
-      />)
+      // desktop using
+      switch (showOn) {
+        case "mobile": {
+          return (<></>)
+        }
+        case "desktop": {
+          return (<DecoBackground
+            repeat={'repeat'}
+            position={'absolute'}
+          />)
+        }
+      }
     }
+
   }, [state.clientWidth])
 
   const Page = useCallback(() => {
@@ -175,8 +193,9 @@ function TagPage() {
         />
       </div>
 
-      <Background />
+      <Background showOn={'mobile'} />
       {viewContents && (<div className={`${styles['main-content']}`}>
+        <Background showOn={'desktop'} />
 
         {viewContents.map((content, index) =>
           <ConnectContent key={index} index={index} content={content} category={tag} />
